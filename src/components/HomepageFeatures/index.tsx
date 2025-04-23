@@ -1,42 +1,49 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
 type FeatureItem = {
-  title: string;
+  title: ReactNode;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: <Translate>零侵入式接入</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        <Translate>
+          通过配置文件即可将现有 RESTful 或 gRPC 服务转为 MCP 接口，
+          无需修改原有服务，秒级接入新生态。
+        </Translate>
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: <Translate>轻量高可用</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        <Translate>
+          架构轻量，支持多副本部署。无论是本地、ECS 还是 K8s，
+          都能轻松部署并实现高可用。
+        </Translate>
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: <Translate>多协议配置转换</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        <Translate>
+          支持 RESTful 和 gRPC 通过 YAML 配置转为 MCP Server，
+          可轻松接入多种微服务架构与 AI 工具链。
+        </Translate>
       </>
     ),
   },
