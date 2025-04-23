@@ -8,8 +8,9 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: '入门指南',
+      label: '快速开始',
       items: [
+        'getting-started/quick-start',
         'getting-started/installation',
         'getting-started/configuration',
         'getting-started/examples',
