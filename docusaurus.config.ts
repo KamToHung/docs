@@ -1,34 +1,30 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'MCP Gateway',
+  tagline: 'Turn APIs into MCP endpoints, without changing a line of code',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://mcp-ecosystem.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/docs/',
+  url: 'https://mcp.ifuryst.com',
+  baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'mcp-ecosystem', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  organizationName: 'mcp-ecosystem',
+  projectName: 'mcp-gateway',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
+    localeConfigs: {
+      zh: { label: '中文' },
+      en: { label: 'English' },
+    },
   },
 
   presets: [
@@ -36,11 +32,10 @@ const config: Config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          path: 'docs',
+          routeBasePath: '/',
+          sidebarPath: require.resolve('./sidebars.ts'),
+          editUrl: 'https://github.com/mcp-ecosystem/docs/edit/main/',
         },
         blog: {
           showReadingTime: true,
@@ -48,11 +43,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
+          editUrl: 'https://github.com/mcp-ecosystem/docs/edit/main/blog/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -65,12 +56,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/social-card.png',
     navbar: {
-      title: 'My Site',
+      title: 'MCP Gateway',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'MCP Gateway Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -78,11 +68,12 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: '文档',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        { to: '/blog', label: '博客', position: 'left' },
+        { type: 'localeDropdown', position: 'right' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/mcp-ecosystem/mcp-gateway',
           label: 'GitHub',
           position: 'right',
         },
@@ -92,46 +83,25 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: '文档',
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            { label: '快速开始', to: '/docs/intro' },
           ],
         },
         {
-          title: 'Community',
+          title: '社区',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            { label: '讨论区', href: 'https://github.com/mcp-ecosystem/mcp-gateway/discussions' },
           ],
         },
         {
-          title: 'More',
+          title: '更多',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
+            { label: 'GitHub', href: 'https://github.com/mcp-ecosystem/docs' },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `版权所有 © ${new Date().getFullYear()} MCP Gateway。由 <a href="https://www.ifuryst.com/" target="_blank" rel="noopener noreferrer">Leo</a> 创建。`,
     },
     prism: {
       theme: prismThemes.github,
