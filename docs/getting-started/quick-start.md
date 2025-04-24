@@ -12,6 +12,13 @@ curl -sL https://raw.githubusercontent.com/mcp-ecosystem/mcp-gateway/refs/heads/
 curl -sL https://raw.githubusercontent.com/mcp-ecosystem/mcp-gateway/refs/heads/main/.env.example -o .env.allinone
 ```
 
+> LLMs可以按需更换，如换成千问
+> ```bash
+> OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/
+> OPENAI_API_KEY=sk-yourkeyhere
+> OPENAI_MODEL=qwen-turbo
+> ```
+
 2. 使用 Docker 运行 MCP Gateway：
 
 ```bash

@@ -117,6 +117,7 @@ const createConfig = async function (): Promise<Config> {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        additionalLanguages: ['bash'],
       },
     },
   };
