@@ -3,12 +3,16 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.核心功能": {
-    "message": "Core Features",
-    "description": "The label for category 核心功能 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.安装部署": {
+    "message": "Deployment",
+    "description": "The label for category 安装部署 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.快速开始": {
-    "message": "Getting Started",
-    "description": "The label for category 快速开始 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.配置说明": {
+    "message": "Configuration Guide",
+    "description": "The label for category 配置说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.客户端使用": {
+    "message": "Client Usage",
+    "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
   }
 }

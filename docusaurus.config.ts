@@ -86,7 +86,7 @@ const createConfig = async function (): Promise<Config> {
             items: [
               {
                 label: locale === 'en' ? 'Getting Started' : '快速开始',
-                to: '/docs/intro',
+                to: '/getting-started/quick-start',
               },
             ],
           },
@@ -97,13 +97,21 @@ const createConfig = async function (): Promise<Config> {
                 label: locale === 'en' ? 'Discussions' : '讨论区',
                 href: 'https://github.com/mcp-ecosystem/mcp-gateway/discussions',
               },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/udf69cT9TY',
+              },
             ],
           },
           {
             title: locale === 'en' ? 'More' : '更多',
             items: [
               {
-                label: 'GitHub',
+                label: 'GitHub - MCP Gateway',
+                href: 'https://github.com/mcp-ecosystem/mcp-gateway',
+              },
+              {
+                label: 'GitHub - Docs',
                 href: 'https://github.com/mcp-ecosystem/docs',
               },
             ],
