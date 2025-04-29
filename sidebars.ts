@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'configuration/apiserver',
         'configuration/mcp-gateway',
+        'configuration/gateways',
       ],
     },
     {
