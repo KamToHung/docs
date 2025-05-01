@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Nächste",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.安装部署": {
+    "message": "Bereitstellung",
+    "description": "The label for category 安装部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.配置说明": {
+    "message": "Konfigurationsanleitung",
+    "description": "The label for category 配置说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.客户端使用": {
+    "message": "Client-Nutzung",
+    "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
+  }
+}

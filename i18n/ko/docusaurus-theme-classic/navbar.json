@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "MCP 게이트웨이",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "MCP Gateway 로고",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.文档": {
+    "message": "문서",
+    "description": "Navbar item with label 文档"
+  },
+  "item.label.博客": {
+    "message": "블로그",
+    "description": "Navbar item with label 博客"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

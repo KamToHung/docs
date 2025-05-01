@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "अगला",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.安装部署": {
+    "message": "तैनाती",
+    "description": "The label for category 安装部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.配置说明": {
+    "message": "कॉन्फ़िगरेशन गाइड",
+    "description": "The label for category 配置说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.客户端使用": {
+    "message": "क्लाइंट उपयोग",
+    "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
+  }
+}
