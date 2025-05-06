@@ -1,53 +1,406 @@
 # 网关代理服务配置
 
+## 配置示例
 
-## 跨域
+以下是一个完整的配置示例，包含了路由、CORS、响应处理等配置：
+
 ```yaml
+name: "mock-user-svc"                 # 代理服务名称，全局唯一
+
+# 路由配置
 routers:
-  - server: "user"
-    prefix: "/mcp/user"
+  - server: "mock-user-svc"     # 服务名称
+    prefix: "/mcp/user"         # 路由前缀，全局唯一，不可重复，建议按照服务或者领域+模块来区分前缀
+
+    # CORS 配置
     cors:
-      allowOrigins:
+      allowOrigins:             # 开发测试环境可全部开放，线上最好按需开放。（大部分MCP Client是不需要开放跨域的）
         - "*"
-      allowMethods:
+      allowMethods:             # 允许的请求方法，按需开放，对于MCP（SSE和Streamable）来说通常只需要这3个方法即可
         - "GET"
         - "POST"
         - "OPTIONS"
       allowHeaders:
-        - "Content-Type"
-        - "Authorization"
-        - "Mcp-Session-Id"
+        - "Content-Type"        # 必须允许的
+        - "Authorization"       # 有鉴权需求的需要支持请求里携带此Key
+        - "Mcp-Session-Id"      # 对于MCP来说，必须支持请求里携带这个Key，否则Streamable HTTP无法正常使用
       exposeHeaders:
-        - "Mcp-Session-Id"
-      allowCredentials: true
+        - "Mcp-Session-Id"      # 对于MCP来说，开启跨域的时候必须要暴露这个Key，否则Streamable HTTP无法正常使用
+      allowCredentials: true    # 是否增加 Access-Control-Allow-Credentials: true 这个Header
+
+# 服务配置
+servers:
+  - name: "mock-user-svc"             # 服务名称，需要与routers中的server保持一致
+    namespace: "user-service"         # 服务命名空间，用于服务分组
+    description: "Mock User Service"  # 服务描述
+    allowedTools:                     # 允许使用的工具列表（为tools的子集）
+      - "register_user"
+      - "get_user_by_email"
+      - "update_user_preferences"
+    config:                                           # 服务级别的配置，可以在tools中通过{{.Config}}引用
+      Cookie: 123                                     # 写死的配置
+      Authorization: 'Bearer {{ env "AUTH_TOKEN" }}'  # 从环境变量中获取的配置，用法是'{{ env "ENV_VAR_NAME" }}'
+
+# 工具配置
+tools:
+  - name: "register_user"                                   # 工具名称
+    description: "Register a new user"                      # 工具描述
+    method: "POST"                                          # 请求目标（上游、后端）服务的HTTP方法
+    endpoint: "http://localhost:5236/users"                 # 目标服务地址
+    headers:                                                # 请求头配置，用于在请求目标服务时携带的请求头
+      Content-Type: "application/json"                      # 写死的请求头
+      Authorization: "{{.Request.Headers.Authorization}}"   # 使用从客户端请求里提取的Authorization头（用于透传的场景）
+      Cookie: "{{.Config.Cookie}}"                          # 使用服务配置中的值
+    args:                         # 参数配置
+      - name: "username"          # 参数名称
+        position: "body"          # 参数位置：header, query, path, body
+        required: true            # 参数是否必填
+        type: "string"            # 参数类型
+        description: "Username"   # 参数描述
+        default: ""               # 默认值
+      - name: "email"
+        position: "body"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+    requestBody: |-                       # 请求体模板，用于动态生成请求体，如：从参数（MCP的请求arguments）中提取的值
+      {
+        "username": "{{.Args.username}}",
+        "email": "{{.Args.email}}"
+      }
+    responseBody: |-                      # 响应体模板，用于动态生成响应体，如：从响应中提取的值
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}"
+      }
+
+  - name: "get_user_by_email"
+    description: "Get user by email"
+    method: "GET"
+    endpoint: "http://localhost:5236/users/email/{{.Args.email}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+    responseBody: |-
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}"
+      }
+
+  - name: "update_user_preferences"
+    description: "Update user preferences"
+    method: "PUT"
+    endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "{{.Request.Headers.Authorization}}"
+      Cookie: "{{.Config.Cookie}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+      - name: "isPublic"
+        position: "body"
+        required: true
+        type: "boolean"
+        description: "Whether the user profile is public"
+        default: "false"
+      - name: "showEmail"
+        position: "body"
+        required: true
+        type: "boolean"
+        description: "Whether to show email in profile"
+        default: "true"
+      - name: "theme"
+        position: "body"
+        required: true
+        type: "string"
+        description: "User interface theme"
+        default: "light"
+      - name: "tags"
+        position: "body"
+        required: true
+        type: "array"
+        items:
+           type: "string"
+           enum: ["developer", "designer", "manager", "tester"]
+        description: "User role tags"
+        default: "[]"
+    requestBody: |-
+      {
+        "isPublic": {{.Args.isPublic}},
+        "showEmail": {{.Args.showEmail}},
+        "theme": "{{.Args.theme}}",
+        "tags": {{.Args.tags}}
+      }
+    responseBody: |-
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}",
+        "preferences": {
+          "isPublic": {{.Response.Data.preferences.isPublic}},
+          "showEmail": {{.Response.Data.preferences.showEmail}},
+          "theme": "{{.Response.Data.preferences.theme}}",
+          "tags": {{.Response.Data.preferences.tags}}
+        }
+      }
 ```
 
-> **注意：** 必须在 `allowHeaders` 和 `exposeHeaders` 中显式配置 `Mcp-Session-Id`，否则客户端无法正确请求和读取响应头中的 `Mcp-Session-Id`。
+## 配置说明
 
+### 1. 基础配置
 
-## 响应处理
+- `name`: 代理服务名称，全局唯一，用于标识不同的代理服务
+- `routers`: 路由配置列表，定义请求的转发规则
+- `servers`: 服务配置列表，定义服务的元数据和允许使用的工具
+- `tools`: 工具配置列表，定义具体的API调用规则
 
-目前支持 **两种响应处理模式**：
+可以把一份配置当作一个命名空间，建议按照服务或者领域来区分，某个服务里包含很多API接口，每个API接口对应一个Tool
 
-### 1. 透传响应体（Pass-through）
+### 2. 路由配置
 
-不对后端响应做任何处理，直接转发给客户端。模板示例：
+路由配置用于定义请求的转发规则：
 
 ```yaml
-responseBody: |-
-  {{.Response.Body}}
+routers:
+  - server: "mock-user-svc"     # 服务名称，需要与servers中的name保持一致
+    prefix: "/mcp/user"         # 路由前缀，全局唯一，不可重复
 ```
 
-### 2. 自定义字段响应（Field Mapping）
+目前默认情况下会在`prefix`的基础之上衍生出3个接入点：
+- SSE: `${prefix}/sse`，如：`/mcp/user/sse`
+- SSE: `${prefix}/message`，如：`/mcp/user/message`
+- StreamableHTTP: `${prefix}/mcp`，如：`/mcp/user/mcp`
 
-将后端响应体按 JSON 结构解析，提取特定字段后再返回。模板示例：
+
+### 3. CORS配置
+
+跨域资源共享（CORS）配置用于控制跨域请求的访问权限：
 
 ```yaml
-responseBody: |-
-  {
-    "id": "{{.Response.Data.id}}",
-    "username": "{{.Response.Data.username}}",
-    "email": "{{.Response.Data.email}}",
-    "createdAt": "{{.Response.Data.createdAt}}"
-  }
+cors:
+  allowOrigins:             # 开发测试环境可全部开放，线上最好按需开放。（大部分MCP Client是不需要开放跨域的）
+    - "*"
+  allowMethods:             # 允许的请求方法，按需开放，对于MCP（SSE和Streamable）来说通常只需要这3个方法即可
+    - "GET"
+    - "POST"
+    - "OPTIONS"
+  allowHeaders:
+    - "Content-Type"        # 必须允许的
+    - "Authorization"       # 有鉴权需求的需要支持请求里携带此Key
+    - "Mcp-Session-Id"      # 对于MCP来说，必须支持请求里携带这个Key，否则Streamable HTTP无法正常使用
+  exposeHeaders:
+    - "Mcp-Session-Id"      # 对于MCP来说，开启跨域的时候必须要暴露这个Key，否则Streamable HTTP无法正常使用
+  allowCredentials: true    # 是否增加 Access-Control-Allow-Credentials: true 这个Header
 ```
+
+> **通常情况下，MCP Client是不需要开放跨域的**
+
+### 4. 服务配置
+
+服务配置用于定义服务元信息、关联的工具列表，以及服务级别的配置
+
+```yaml
+servers:
+  - name: "mock-user-svc"             # 服务名称，需要与routers中的server保持一致
+    namespace: "user-service"         # 服务命名空间，用于服务分组
+    description: "Mock User Service"  # 服务描述
+    allowedTools:                     # 允许使用的工具列表（为tools的子集）
+      - "register_user"
+      - "get_user_by_email"
+      - "update_user_preferences"
+    config:                                           # 服务级别的配置，可以在tools中通过{{.Config}}引用
+      Cookie: 123                                     # 写死的配置
+      Authorization: 'Bearer {{ env "AUTH_TOKEN" }}'  # 从环境变量中获取的配置，用法是'{{ env "ENV_VAR_NAME" }}'
+```
+
+服务级别的配置，可以在tools中通过 `{{.Config}}` 引用。此处可以通过写死在配置文件里的方式，也可以通过从环境变量中获取的方式。通过环境变量注入的话，需要通过`{{ env "ENV_VAR_NAME" }}`的方式引用
+
+### 5. 工具配置
+
+工具配置用于定义具体的API调用规则：
+
+```yaml
+tools:
+  - name: "register_user"                                   # 工具名称
+    description: "Register a new user"                      # 工具描述
+    method: "POST"                                          # 请求目标（上游、后端）服务的HTTP方法
+    endpoint: "http://localhost:5236/users"                 # 目标服务地址
+    headers:                                                # 请求头配置，用于在请求目标服务时携带的请求头
+      Content-Type: "application/json"                      # 写死的请求头
+      Authorization: "{{.Request.Headers.Authorization}}"   # 使用从客户端请求里提取的Authorization头（用于透传的场景）
+      Cookie: "{{.Config.Cookie}}"                          # 使用服务配置中的值
+    args:                         # 参数配置
+      - name: "username"          # 参数名称
+        position: "body"          # 参数位置：header, query, path, body
+        required: true            # 参数是否必填
+        type: "string"            # 参数类型
+        description: "Username"   # 参数描述
+        default: ""               # 默认值
+      - name: "email"
+        position: "body"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+    requestBody: |-                       # 请求体模板，用于动态生成请求体，如：从参数（MCP的请求arguments）中提取的值
+      {
+        "username": "{{.Args.username}}",
+        "email": "{{.Args.email}}"
+      }
+    responseBody: |-                      # 响应体模板，用于动态生成响应体，如：从响应中提取的值
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}"
+      }
+
+  - name: "get_user_by_email"
+    description: "Get user by email"
+    method: "GET"
+    endpoint: "http://localhost:5236/users/email/{{.Args.email}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+    responseBody: |-
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}"
+      }
+
+  - name: "update_user_preferences"
+    description: "Update user preferences"
+    method: "PUT"
+    endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "{{.Request.Headers.Authorization}}"
+      Cookie: "{{.Config.Cookie}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email"
+        default: ""
+      - name: "isPublic"
+        position: "body"
+        required: true
+        type: "boolean"
+        description: "Whether the user profile is public"
+        default: "false"
+      - name: "showEmail"
+        position: "body"
+        required: true
+        type: "boolean"
+        description: "Whether to show email in profile"
+        default: "true"
+      - name: "theme"
+        position: "body"
+        required: true
+        type: "string"
+        description: "User interface theme"
+        default: "light"
+      - name: "tags"
+        position: "body"
+        required: true
+        type: "array"
+        items:
+           type: "string"
+           enum: ["developer", "designer", "manager", "tester"]
+        description: "User role tags"
+        default: "[]"
+    requestBody: |-
+      {
+        "isPublic": {{.Args.isPublic}},
+        "showEmail": {{.Args.showEmail}},
+        "theme": "{{.Args.theme}}",
+        "tags": {{.Args.tags}}
+      }
+    responseBody: |-
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}",
+        "preferences": {
+          "isPublic": {{.Response.Data.preferences.isPublic}},
+          "showEmail": {{.Response.Data.preferences.showEmail}},
+          "theme": "{{.Response.Data.preferences.theme}}",
+          "tags": {{.Response.Data.preferences.tags}}
+        }
+      }
+```
+
+#### 5.1 请求参数组装
+
+请求目标服务的时候会涉及组装参数的动作，目前有几个来源：
+1. `.Config`: 从服务级别的配置中提取值
+2.`.Args`: 直接从请求参数中提取值
+3.`.Request`: 从请求中提取的值，包括请求头`.Request.Headers`、请求体`.Request.Body`等
+
+组装在 `requestBody` 里面，比如：
+```yaml
+    requestBody: |-
+      {
+        "isPublic": {{.Args.isPublic}},
+        "showEmail": {{.Args.showEmail}},
+        "theme": "{{.Args.theme}}",
+        "tags": {{.Args.tags}}
+      }
+```
+
+包括 `endpoint` 即目标地址也可以使用以上的来源去提取值，比如 `http://localhost:5236/users/{{.Args.email}}/preferences` 就是从请求参数中提取的值
+
+#### 5.2 响应参数组装
+
+响应体的组装和请求体的组装类似：
+1. `.Response.Data`: 从响应中提取的值，响应必须是JSON的格式才可以提取
+2. `.Response.Body`: 直接透传整个响应体，会忽略响应内容格式，直接传递给客户端
+
+都是通过 `.Response` 来提取值，比如：
+```yaml
+    responseBody: |-
+      {
+        "id": "{{.Response.Data.id}}",
+        "username": "{{.Response.Data.username}}",
+        "email": "{{.Response.Data.email}}",
+        "createdAt": "{{.Response.Data.createdAt}}"
+      }
+```
+
+## 配置存储
+
+网关代理配置可以通过以下两种方式存储：
+
+1. 数据库存储（推荐）：
+    - 支持 SQLite3、PostgreSQL、MySQL
+    - 每个配置作为一条记录存储
+    - 支持动态更新和热重载
+
+2. 文件存储：
+    - 每个配置单独存储为一个 YAML 文件
+    - 类似 Nginx 的 vhost 配置方式
+    - 文件名建议使用服务名称，如 `mock-user-svc.yaml`
+
