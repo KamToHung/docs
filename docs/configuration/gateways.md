@@ -357,8 +357,8 @@ tools:
 
 请求目标服务的时候会涉及组装参数的动作，目前有几个来源：
 1. `.Config`: 从服务级别的配置中提取值
-2.`.Args`: 直接从请求参数中提取值
-3.`.Request`: 从请求中提取的值，包括请求头`.Request.Headers`、请求体`.Request.Body`等
+2. `.Args`: 直接从请求参数中提取值
+3. `.Request`: 从请求中提取的值，包括请求头`.Request.Headers`、请求体`.Request.Body`等
 
 组装在 `requestBody` 里面，比如：
 ```yaml
