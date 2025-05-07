@@ -110,3 +110,27 @@ openai:
 ```
 
 目前仅集成了OpenAI API兼容的LLMs调用
+
+## 超级管理员配置
+
+超级管理员配置用于设置系统初始管理员账户，每次启动 `apiserver` 会自动检测是否存在，若不存在会自动创建
+
+```yaml
+super_admin:
+  username: "${SUPER_ADMIN_USERNAME:admin}"     # 超级管理员用户名
+  password: "${SUPER_ADMIN_PASSWORD:admin}"     # 超级管理员密码（生产环境请修改）
+```
+
+**强烈建议生产环境或者公网环境使用强密码！**
+
+## JWT配置
+
+JWT配置用于设置web认证相关的参数：
+
+```yaml
+jwt:
+  secret_key: "${APISERVER_JWT_SECRET_KEY:Pls-Change-Me!}"  # JWT密钥（生产环境请修改）
+  duration: "${APISERVER_JWT_DURATION:24h}"                  # Token有效期
+```
+
+**强烈建议生产环境或者公网环境使用强密码！**

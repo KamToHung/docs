@@ -1,21 +1,21 @@
 # apiserver.yaml
 
-設定ファイルは `${VAR:default}` 構文を使用して環境変数の注入をサポートしています。環境変数が設定されていない場合、デフォルト値が使用されます。
+設定ファイルは`${VAR:default}`構文を使用した環境変数の注入をサポートしています。環境変数が設定されていない場合は、デフォルト値が使用されます。
 
-一般的な方法は、異なる `.env`、`.env.development`、`.env.prod` ファイルを通じて値を注入するか、ハードコードされた値で直接設定を変更することです。
+一般的な方法は、異なる`.env`、`.env.development`、`.env.prod`ファイルを通じて値を注入するか、設定を直接変更して固定値を設定することです。
 
 ## チャットメッセージデータベース設定
 
-この設定は、バックエンドでチャットメッセージを保存するために特別に設計されています（プロキシ設定と同じデータベースを共有することができます）。以下の画像に示される情報に対応しています：
+この設定は、バックエンドのチャットメッセージ保存用の設定です（もちろん、プロキシ設定と同じデータベースに保存することもできます）。以下の画像に示す情報に対応しています：
 
-![Chat Sessions and Messages](/img/chat_histories.png)
+![チャットセッションとメッセージ](/img/chat_histories.png)
 
-現在、3種類のデータベースをサポートしています：
+現在3種類のデータベースをサポートしています：
 - SQLite3
 - PostgreSQL
 - MySQL
 
-追加のデータベースのサポートが必要な場合は、[Issue](https://github.com/mcp-ecosystem/mcp-gateway/issues)セクションでリクエストするか、対応する実装を自身で実装してPRを提出することができます :)
+追加のデータベースサポートが必要な場合は、[Issue](https://github.com/mcp-ecosystem/mcp-gateway/issues)でリクエストするか、対応する実装を作成してPRを提出することができます :)
 
 ```yaml
 database:
@@ -30,20 +30,20 @@ database:
 
 ## ゲートウェイプロキシストレージ設定
 
-これは、ゲートウェイプロキシ設定を保存するために使用され、特にMCPからAPIへのマッピングを保存します。以下の画像に示されています：
+これはゲートウェイプロキシ設定を保存するために使用されます。具体的には、MCPからAPIへのマッピングの設定で、以下の画像に示すデータに対応しています：
 
-![Gateway Proxy Configuration](/img/gateway_proxies.png)
+![ゲートウェイプロキシ設定](/img/gateway_proxies.png)
 
-現在、2つのタイプをサポートしています：
-- disk: 設定はディスク上のファイルとして保存され、各設定は個別のファイルに保存されます。nginxのvhostの概念と同様で、例えば `svc-a.yaml`、`svc-b.yaml` などです
-- db: データベースに保存し、各設定は1つのレコードとなります。現在、3種類のデータベースをサポートしています：
+現在2種類をサポートしています：
+- disk: 設定はディスク上のファイルとして保存され、各設定は個別のファイルに保存されます。nginxのvhostと同様の概念で、例えば`svc-a.yaml`、`svc-b.yaml`のように保存されます
+- db: データベースに保存し、各設定は1つのレコードとして保存されます。現在3種類のデータベースをサポートしています：
     - SQLite3
     - PostgreSQL
     - MySQL
 
 ```yaml
 storage:
-  type: "${GATEWAY_STORAGE_TYPE:db}"                    # ストレージタイプ: db, disk
+  type: "${GATEWAY_STORAGE_TYPE:db}"                    # ストレージタイプ：db, disk
   
   # データベース設定（typeが'db'の場合に使用）
   database:
@@ -57,28 +57,28 @@ storage:
   
   # ディスク設定（typeが'disk'の場合に使用）
   disk:
-    path: "${GATEWAY_STORAGE_DISK_PATH:}"               # データファイル保存パス
+    path: "${GATEWAY_STORAGE_DISK_PATH:}"               # データファイルの保存パス
 ```
 
 ## 通知設定
 
-通知モジュールは主に、`mcp-gateway` に設定更新を通知し、サービスの再起動を必要とせずにホットリロードをトリガーするために使用されます。
+通知設定モジュールは主に設定が更新されたときに`mcp-gateway`に通知し、サービスを再起動することなくホットリロードを実行するために使用されます。
 
-現在、4つの通知方法をサポートしています：
-- signal: オペレーティングシステムのシグナルを通じて通知します。`kill -SIGHUP <pid>` や `nginx -s reload` と同様です。`mcp-gateway reload` コマンドを通じてトリガーでき、シングルマシンデプロイメントに適しています
-- api: API呼び出しを通じて通知します。`mcp-gateway` は別のポートでリッスンし、リクエストを受信するとホットリロードを実行します。`curl http://localhost:5235/_reload` を通じてトリガーでき、シングルマシンおよびクラスターデプロイメントに適しています
-- redis: Redisのpub/sub機能を通じて通知します。シングルマシンおよびクラスターデプロイメントに適しています
-- composite: 複数の方法を使用する組み合わせ通知です。デフォルトで `signal` と `api` が常に有効になっており、他の方法と組み合わせることができます。シングルマシンおよびクラスターデプロイメントに適しており、推奨されるデフォルトのアプローチです
+現在4種類の通知方法をサポートしています：
+- signal: オペレーティングシステムのシグナルを通じて通知します。`kill -SIGHUP <pid>`や`nginx -s reload`と同様の方法で、`mcp-gateway reload`コマンドで呼び出すことができます。単一マシンデプロイメントに適しています
+- api: API呼び出しを通じて通知します。`mcp-gateway`は独立したポートでリッスンし、リクエストを受信するとホットリロードを実行します。`curl http://localhost:5235/_reload`で直接呼び出すことができ、単一マシンとクラスターデプロイメントの両方に適しています
+- redis: Redisのパブリッシュ/サブスクライブ機能を通じて通知します。単一マシンとクラスターデプロイメントの両方に適しています
+- composite: 複数の方法を組み合わせた通知です。デフォルトでは`signal`と`api`が常に有効で、他の方法と組み合わせることができます。単一マシンとクラスターデプロイメントの両方に適しており、推奨されるデフォルトの方法です
 
-通知ロール：
-- sender: 送信者ロールで、通知の送信を担当します。`apiserver` はこのモードのみ使用できます
-- receiver: 受信者ロールで、通知の受信を担当します。シングルマシンの `mcp-gateway` はこのモードのみ使用することを推奨します
-- both: 送信者と受信者の両方のロールです。クラスターデプロイされた `mcp-gateway` はこのモードを使用できます
+通知の役割：
+- sender: 送信者役割で、通知を送信する責任があります。`apiserver`はこのモードのみ使用できます
+- receiver: 受信者役割で、通知を受信する責任があります。単一マシンの`mcp-gateway`はこのモードのみ使用することを推奨します
+- both: 送信者と受信者の両方の役割です。クラスターデプロイされた`mcp-gateway`はこのモードを使用できます
 
 ```yaml
 notifier:
-  role: "${APISERVER_NOTIFIER_ROLE:sender}"              # ロール: sender, receiver, または both
-  type: "${APISERVER_NOTIFIER_TYPE:signal}"              # タイプ: signal, api, redis, または composite
+  role: "${APISERVER_NOTIFIER_ROLE:sender}"              # 役割：sender, receiver, またはboth
+  type: "${APISERVER_NOTIFIER_TYPE:signal}"              # タイプ：signal, api, redis, またはcomposite
 
   # シグナル設定（typeが'signal'の場合に使用）
   signal:
@@ -95,12 +95,12 @@ notifier:
     addr: "${APISERVER_NOTIFIER_REDIS_ADDR:localhost:6379}"                             # Redisアドレス
     password: "${APISERVER_NOTIFIER_REDIS_PASSWORD:UseStrongPasswordIsAGoodPractice}"   # Redisパスワード
     db: ${APISERVER_NOTIFIER_REDIS_DB:0}                                                # Redisデータベース番号
-    topic: "${APISERVER_NOTIFIER_REDIS_TOPIC:mcp-gateway:reload}"                       # Redisパブ/サブトピック
+    topic: "${APISERVER_NOTIFIER_REDIS_TOPIC:mcp-gateway:reload}"                       # Redisパブリッシュ/サブスクライブトピック
 ```
 
 ## OpenAI API設定
 
-OpenAI設定ブロックは、OpenAI APIの統合のための設定を定義します：
+OpenAI設定ブロックはOpenAI API統合の設定を定義します：
 
 ```yaml
 openai:
@@ -109,4 +109,28 @@ openai:
   base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1/}"     # APIベースURL
 ```
 
-現在、OpenAI API互換のLLM呼び出しのみが統合されています 
+現在はOpenAI API互換のLLMs呼び出しのみを統合しています
+
+## スーパー管理者設定
+
+スーパー管理者設定はシステムの初期管理者アカウントを設定するために使用されます。`apiserver`が起動するたびに存在を確認し、存在しない場合は自動的に作成されます
+
+```yaml
+super_admin:
+  username: "${SUPER_ADMIN_USERNAME:admin}"     # スーパー管理者ユーザー名
+  password: "${SUPER_ADMIN_PASSWORD:admin}"     # スーパー管理者パスワード（本番環境では変更してください）
+```
+
+**本番環境または公衆ネットワーク環境では強力なパスワードを使用することを強く推奨します！**
+
+## JWT設定
+
+JWT設定はWeb認証関連のパラメータを設定するために使用されます：
+
+```yaml
+jwt:
+  secret_key: "${APISERVER_JWT_SECRET_KEY:Pls-Change-Me!}"  # JWTキー（本番環境では変更してください）
+  duration: "${APISERVER_JWT_DURATION:24h}"                  # トークン有効期間
+```
+
+**本番環境または公衆ネットワーク環境では強力なパスワードを使用することを強く推奨します！** 
