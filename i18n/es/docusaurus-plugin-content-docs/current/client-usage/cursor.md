@@ -3,14 +3,14 @@
 > **Para un tutorial más detallado sobre la configuración de MCP en Cursor, consulte la documentación oficial:**  
 > https://docs.cursor.com/context/model-context-protocol
 
-Aquí te mostraré un método básico de configuración. Primero, asegúrate de haber creado los directorios y archivos necesarios:
+Aquí te mostraré un método básico de configuración. Asegúrate de haber creado los directorios y archivos necesarios:
 
 ```bash
 mkdir -p .cursor
 touch .cursor/mcp.json
 ```
 
-Luego configura el Servidor MCP. Aquí usaremos nuestro propio servicio de usuario simulado para pruebas:
+Luego, configura el Servidor MCP. Aquí usaremos nuestro servicio de usuario simulado para pruebas:
 
 ![.cursor/mcp.json](/img/cursor.mcp.json.png)
 
@@ -24,13 +24,21 @@ Luego configura el Servidor MCP. Aquí usaremos nuestro propio servicio de usuar
 }
 ```
 
-A continuación, abre la configuración de Cursor y habilita este Servidor MCP en la sección **MCP**. Una vez habilitado, verás que se convierte en un pequeño punto verde y también listará las Herramientas disponibles.
+A continuación, abre la configuración de Cursor y habilita este Servidor MCP en la sección **MCP**. Después de habilitarlo, verás que se convierte en un pequeño punto verde y también mostrará las herramientas disponibles.
 
 ![.cursor/mcp.json](/img/cursor.mcp.servers.png)
 
-Finalmente, puedes probarlo en la ventana de Chat, por ejemplo, pidiéndole que te ayude a registrar un usuario y luego consultar la información de ese usuario. Si funciona, ¡estás listo!
+Finalmente, puedes probarlo en la ventana de Chat. Por ejemplo, pídele que te ayude a registrar un usuario y luego consultar la información de ese usuario. Si funciona, ¡todo está listo!
 
-Por ejemplo, puedes escribir:
+Puedes intentar escribir:
 ```
-Ayúdame a consultar el usuario ifuryst@gmail.com, si no se encuentra, regístralo con el nombre de usuario Leo
-``` 
+Ayúdame a registrar un usuario Leo ifuryst@gmail.com
+```
+
+```
+Ayúdame a consultar el usuario ifuryst@gmail.com, si no se encuentra por favor regístralo con el nombre de usuario Leo
+```
+
+> **A través de pruebas reales, descubrimos que este servicio simulado puede causar errores del modelo en algunos casos debido al manejo de nombres y correos electrónicos, lo cual puede ignorarse. Puedes usar tu API real en su lugar.**
+
+![cursor usecase](/img/cursor.usecase.png) 

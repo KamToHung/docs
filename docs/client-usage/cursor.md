@@ -33,6 +33,14 @@ touch .cursor/mcp.json
 
 比如你可以输入：
 ```
+帮我注册一个用户 Leo ifuryst@gmail.com
+```
+
+```
 帮我查询一下用户ifuryst@gmail.com，如果没查到帮我注册一下，用户名是Leo
 ```
+
+> **通过实际测试发现，这个mock服务因为涉及名字邮箱，可能在某些情况下引发模型错误导致无法调用，可忽略这种情况，配置实际的API使用即可**
+
+![cursor usecase](/img/cursor.usecase.png)
 
