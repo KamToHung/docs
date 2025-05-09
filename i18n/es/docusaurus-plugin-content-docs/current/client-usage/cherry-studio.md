@@ -6,11 +6,11 @@ Cherry Studio Github: [cherry-studio/docs/README.zh.md](https://github.com/Cherr
 > https://docs.cherry-ai.com/advanced-basic/mcp
 
 Primero, configuramos el servidor MCP en la configuración de **Servidores MCP**. Aquí usamos nuestro propio servicio de usuario simulado para pruebas:
-![cherrystudio.mcp.servers.png](/img/cherrystudio.mcp.servers.png)
+![cherrystudio.mcp.servers.png](../../../../../static/img/cherrystudio.mcp.servers.png)
 
 A continuación, después de activarlo haciendo clic en el botón en la esquina superior derecha, haga clic en **Herramientas** para ver las herramientas en este servicio MCP, junto con sus parámetros y tipos de parámetros.
 
-![cherrystudio.mcp.tools.png](/img/cherrystudio.mcp.tools.png)
+![cherrystudio.mcp.tools.png](../../../../../static/img/cherrystudio.mcp.tools.png)
 
 Finalmente, puede probarlo en la ventana de chat. Por ejemplo, pídale que registre un usuario y luego consulte la información de ese usuario. Si funciona, está listo.
 
@@ -23,7 +23,8 @@ Ayúdame a registrar un usuario Leo ifuryst@gmail.com
 Ayúdame a consultar el usuario ifuryst@gmail.com, si no se encuentra, por favor regístralo con el nombre de usuario Leo
 ```
 
-![cherrystudio.usecase.png](/img/cherrystudio.usecase.png)
+![cherrystudio.mcp.servers.choose.png](../../../../../static/img/cherrystudio.mcp.servers.choose.png)
+![cherrystudio.usecase.png](../../../../../static/img/cherrystudio.usecase.png)
 
 > **Al chatear con LLM, puede ver que durante el proceso de interacción, reconoce inteligentemente las intenciones de las tareas y selecciona automáticamente las herramientas óptimas del conjunto de herramientas para llamadas automatizadas**
 

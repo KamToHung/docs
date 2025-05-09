@@ -6,11 +6,11 @@ Cherry Studio Github: [cherry-studio/docs/README.zh.md](https://github.com/Cherr
 > https://docs.cherry-ai.com/advanced-basic/mcp
 
 먼저 **MCP 서버** 설정에서 MCP 서버를 구성합니다. 여기서는 자체 시뮬레이션 사용자 서비스를 사용하여 테스트합니다:
-![cherrystudio.mcp.servers.png](/img/cherrystudio.mcp.servers.png)
+![cherrystudio.mcp.servers.png](../../../../../static/img/cherrystudio.mcp.servers.png)
 
 다음으로, 오른쪽 상단의 버튼을 클릭하여 활성화한 후 **도구**를 클릭하면 이 MCP 서비스의 도구와 해당 매개변수 및 매개변수 유형이 표시됩니다.
 
-![cherrystudio.mcp.tools.png](/img/cherrystudio.mcp.tools.png)
+![cherrystudio.mcp.tools.png](../../../../../static/img/cherrystudio.mcp.tools.png)
 
 마지막으로 채팅 창에서 시도해볼 수 있습니다. 예를 들어, 사용자를 등록하고 해당 사용자 정보를 조회하도록 요청합니다. 작동하면 완료된 것입니다.
 
@@ -23,7 +23,8 @@ Cherry Studio Github: [cherry-studio/docs/README.zh.md](https://github.com/Cherr
 사용자 ifuryst@gmail.com을 조회해주세요. 찾을 수 없다면 사용자 이름 Leo로 등록해주세요
 ```
 
-![cherrystudio.usecase.png](/img/cherrystudio.usecase.png)
+![cherrystudio.mcp.servers.choose.png](../../../../../static/img/cherrystudio.mcp.servers.choose.png)
+![cherrystudio.usecase.png](../../../../../static/img/cherrystudio.usecase.png)
 
 > **LLM과 채팅할 때, 상호작용 과정에서 작업 의도를 지능적으로 인식하고 도구 세트에서 최적의 도구를 자동으로 선택하여 자동화된 호출을 수행하는 것을 볼 수 있습니다**
 
