@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
         'configuration/apiserver',
         'configuration/mcp-gateway',
         'configuration/gateways',
+        'configuration/templates',
       ],
     },
     {
