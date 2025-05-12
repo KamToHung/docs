@@ -53,7 +53,7 @@ tools:
       Cookie: "{{.Config.Cookie}}"                          # 使用服务配置中的值
     args:                         # 参数配置
       - name: "username"          # 参数名称
-        position: "body"          # 参数位置：header, query, path, body
+        position: "body"          # 参数位置：header, query, path, body, form-data
         required: true            # 参数是否必填
         type: "string"            # 参数类型
         description: "Username"   # 参数描述
@@ -157,6 +157,32 @@ tools:
           "theme": "{{.Response.Data.preferences.theme}}",
           "tags": {{.Response.Data.preferences.tags}}
         }
+      }
+
+  - name: "update_user_avatar"
+    description: "Update user avatar using a URL via multipart form"
+    method: "POST"
+    endpoint: "http://localhost:5236/users/{{.Args.email}}/avatar"
+    headers:
+      Authorization: "{{.Request.Headers.Authorization}}"
+      Cookie: "{{.Config.Cookie}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email of the user"
+        default: ""
+      - name: "url"
+        position: "form-data"
+        required: true
+        type: "string"
+        description: "The avatar image URL"
+        default: ""
+    responseBody: |-
+      {
+        "message": "{{.Response.Data.message}}",
+        "avatarUrl": "{{.Response.Data.avatarUrl}}"
       }
 ```
 
@@ -246,7 +272,7 @@ tools:
       Cookie: "{{.Config.Cookie}}"                          # 使用服务配置中的值
     args:                         # 参数配置
       - name: "username"          # 参数名称
-        position: "body"          # 参数位置：header, query, path, body
+        position: "body"          # 参数位置：header, query, path, body, form-data
         required: true            # 参数是否必填
         type: "string"            # 参数类型
         description: "Username"   # 参数描述
@@ -351,6 +377,32 @@ tools:
           "tags": {{.Response.Data.preferences.tags}}
         }
       }
+
+  - name: "update_user_avatar"
+    description: "Update user avatar using a URL via multipart form"
+    method: "POST"
+    endpoint: "http://localhost:5236/users/{{.Args.email}}/avatar"
+    headers:
+      Authorization: "{{.Request.Headers.Authorization}}"
+      Cookie: "{{.Config.Cookie}}"
+    args:
+      - name: "email"
+        position: "path"
+        required: true
+        type: "string"
+        description: "Email of the user"
+        default: ""
+      - name: "url"
+        position: "form-data"
+        required: true
+        type: "string"
+        description: "The avatar image URL"
+        default: ""
+    responseBody: |-
+      {
+        "message": "{{.Response.Data.message}}",
+        "avatarUrl": "{{.Response.Data.avatarUrl}}"
+      }
 ```
 
 #### 5.1 请求参数组装
@@ -360,7 +412,29 @@ tools:
 2. `.Args`: 直接从请求参数中提取值
 3. `.Request`: 从请求中提取的值，包括请求头`.Request.Headers`、请求体`.Request.Body`等
 
-组装在 `requestBody` 里面，比如：
+参数位置（position）支持以下几种：
+- `header`: 参数将被放置在请求头中
+- `query`: 参数将被放置在URL查询字符串中
+- `path`: 参数将被放置在URL路径中
+- `body`: 参数将被放置在JSON格式的请求体中
+- `form-data`: 参数将被放置在multipart/form-data格式的请求体中，用于文件上传等场景
+
+当使用 `form-data` 作为参数位置时，不需要指定 `requestBody`，系统会自动将参数组装成 multipart/form-data 格式。例如：
+
+```yaml
+  - name: "update_user_avatar"
+    method: "POST"
+    endpoint: "http://localhost:5236/users/{{.Args.email}}/avatar"
+    args:
+      - name: "url"
+        position: "form-data"
+        required: true
+        type: "string"
+        description: "The avatar image URL"
+```
+
+对于JSON格式的请求体，需要在 `requestBody` 中组装，比如：
+
 ```yaml
     requestBody: |-
       {
@@ -403,4 +477,3 @@ tools:
     - 每个配置单独存储为一个 YAML 文件
     - 类似 Nginx 的 vhost 配置方式
     - 文件名建议使用服务名称，如 `mock-user-svc.yaml`
-

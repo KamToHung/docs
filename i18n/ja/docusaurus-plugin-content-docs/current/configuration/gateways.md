@@ -171,19 +171,19 @@ tools:
 
 設定は名前空間と見なすことができ、サービスまたはドメインで区別することを推奨します。サービスには多くのAPIインターフェースが含まれ、各APIインターフェースは1つのToolに対応します
 
-### 2. ルーティング設定
+### 2. ルーティング構成
 
-ルーティング設定はリクエスト転送ルールを定義するために使用されます：
+ルーティング構成はリクエストの転送ルールを定義するために使用されます：
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # サービス名、serversのnameと一致する必要があります
-    prefix: "/mcp/user"         # ルートプレフィックス、グローバルで一意、重複不可
+  - server: "mock-user-svc"    # サービス名、serversのnameと一致する必要があります
+    prefix: "/mcp/user"        # ルートプレフィックス、グローバルに一意、重複不可
 ```
 
 デフォルトでは、`prefix`から3つのエンドポイントが派生します：
 - SSE: `${prefix}/sse`、例：`/mcp/user/sse`
-- SSE: `${prefix}/message`、例：`/mcp/user/message`
+- SSE Message: `${prefix}/message`、例：`/mcp/user/message`
 - StreamableHTTP: `${prefix}/mcp`、例：`/mcp/user/mcp`
 
 ### 3. CORS設定

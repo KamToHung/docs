@@ -173,18 +173,18 @@ Una configuración puede considerarse como un namespace, se recomienda diferenci
 
 ### 2. Configuración de Enrutamiento
 
-La configuración de enrutamiento se usa para definir reglas de reenvío de solicitudes:
+La configuración de enrutamiento se utiliza para definir las reglas de reenvío de solicitudes:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Nombre del servicio, debe coincidir con name en servers
-    prefix: "/mcp/user"         # Prefijo de ruta, globalmente único, no debe duplicarse
+  - server: "mock-user-svc"     # Nombre del servicio, debe coincidir con el nombre en servers
+    prefix: "/mcp/user"         # Prefijo de ruta, globalmente único, no puede duplicarse
 ```
 
-Por defecto, se derivan tres endpoints del `prefix`:
-- SSE: `${prefix}/sse`, ej. `/mcp/user/sse`
-- SSE: `${prefix}/message`, ej. `/mcp/user/message`
-- StreamableHTTP: `${prefix}/mcp`, ej. `/mcp/user/mcp`
+Por defecto, se derivarán tres puntos de conexión del `prefix`:
+- SSE: `${prefix}/sse`, por ejemplo, `/mcp/user/sse`
+- SSE Message: `${prefix}/message`, por ejemplo, `/mcp/user/message`
+- StreamableHTTP: `${prefix}/mcp`, por ejemplo, `/mcp/user/mcp`
 
 ### 3. Configuración CORS
 

@@ -178,13 +178,13 @@ tools:
 ```yaml
 routers:
   - server: "mock-user-svc"     # सेवा का नाम, servers में name से मेल खाना चाहिए
-    prefix: "/mcp/user"         # रूट प्रीफिक्स, वैश्विक रूप से अद्वितीय, डुप्लिकेट नहीं होना चाहिए
+    prefix: "/mcp/user"         # रूट प्रीफिक्स, वैश्विक रूप से अद्वितीय, प्रतिलिपि नहीं हो सकता
 ```
 
-डिफ़ॉल्ट रूप से, `prefix` से तीन एंडपॉइंट व्युत्पन्न होते हैं:
-- SSE: `${prefix}/sse`, उदा. `/mcp/user/sse`
-- SSE: `${prefix}/message`, उदा. `/mcp/user/message`
-- StreamableHTTP: `${prefix}/mcp`, उदा. `/mcp/user/mcp`
+डिफ़ॉल्ट रूप से, `prefix` से तीन एंडपॉइंट निकाले जाएंगे:
+- SSE: `${prefix}/sse`, उदाहरण: `/mcp/user/sse`
+- SSE Message: `${prefix}/message`, उदाहरण: `/mcp/user/message`
+- StreamableHTTP: `${prefix}/mcp`, उदाहरण: `/mcp/user/mcp`
 
 ### 3. CORS कॉन्फ़िगरेशन
 

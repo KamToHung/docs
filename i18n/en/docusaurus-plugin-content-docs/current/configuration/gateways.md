@@ -183,7 +183,7 @@ routers:
 
 By default, three endpoints will be derived from the `prefix`:
 - SSE: `${prefix}/sse`, e.g., `/mcp/user/sse`
-- SSE: `${prefix}/message`, e.g., `/mcp/user/message`
+- SSE Message: `${prefix}/message`, e.g., `/mcp/user/message`
 - StreamableHTTP: `${prefix}/mcp`, e.g., `/mcp/user/mcp`
 
 ### 3. CORS Configuration

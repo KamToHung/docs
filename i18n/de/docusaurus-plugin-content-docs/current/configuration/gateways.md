@@ -173,17 +173,17 @@ Eine Konfiguration kann als Namespace betrachtet werden, empfohlen wird die Unte
 
 ### 2. Routing-Konfiguration
 
-Die Routing-Konfiguration wird verwendet, um Anforderungsweiterleitungsregeln zu definieren:
+Die Routing-Konfiguration wird verwendet, um Regeln für die Weiterleitung von Anfragen zu definieren:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Service-Name, muss mit name in servers übereinstimmen
-    prefix: "/mcp/user"         # Routenpräfix, global eindeutig, darf nicht dupliziert werden
+  - server: "mock-user-svc"     # Dienstname, muss mit Name in servers übereinstimmen
+    prefix: "/mcp/user"         # Routenpräfix, global eindeutig, kann nicht dupliziert werden
 ```
 
-Standardmäßig werden drei Endpunkte aus dem `prefix` abgeleitet:
+Standardmäßig werden drei Endpunkte vom `prefix` abgeleitet:
 - SSE: `${prefix}/sse`, z.B. `/mcp/user/sse`
-- SSE: `${prefix}/message`, z.B. `/mcp/user/message`
+- SSE Message: `${prefix}/message`, z.B. `/mcp/user/message`
 - StreamableHTTP: `${prefix}/mcp`, z.B. `/mcp/user/mcp`
 
 ### 3. CORS-Konfiguration

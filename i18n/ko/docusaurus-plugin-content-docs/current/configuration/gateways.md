@@ -178,12 +178,12 @@ tools:
 ```yaml
 routers:
   - server: "mock-user-svc"     # 서비스 이름, servers의 name과 일치해야 함
-    prefix: "/mcp/user"         # 라우트 접두사, 전역적으로 고유, 중복 불가
+    prefix: "/mcp/user"         # 라우트 접두사, 전역적으로 고유해야 하며 중복 불가
 ```
 
-기본적으로 `prefix`에서 세 가지 엔드포인트가 파생됩니다:
+기본적으로 `prefix`에서 3개의 엔드포인트가 파생됩니다:
 - SSE: `${prefix}/sse`, 예: `/mcp/user/sse`
-- SSE: `${prefix}/message`, 예: `/mcp/user/message`
+- SSE Message: `${prefix}/message`, 예: `/mcp/user/message`
 - StreamableHTTP: `${prefix}/mcp`, 예: `/mcp/user/mcp`
 
 ### 3. CORS 구성

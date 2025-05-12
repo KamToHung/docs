@@ -177,14 +177,14 @@ La configuration du routage est utilisée pour définir les règles de transfert
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Nom du service, doit correspondre à name dans servers
-    prefix: "/mcp/user"         # Préfixe de route, globalement unique, ne doit pas être dupliqué
+  - server: "mock-user-svc"     # Nom du service, doit correspondre au nom dans servers
+    prefix: "/mcp/user"         # Préfixe de route, globalement unique, ne peut pas être dupliqué
 ```
 
-Par défaut, trois points de terminaison sont dérivés du `prefix` :
-- SSE: `${prefix}/sse`, ex. `/mcp/user/sse`
-- SSE: `${prefix}/message`, ex. `/mcp/user/message`
-- StreamableHTTP: `${prefix}/mcp`, ex. `/mcp/user/mcp`
+Par défaut, trois points de terminaison seront dérivés du `prefix` :
+- SSE : `${prefix}/sse`, par exemple, `/mcp/user/sse`
+- SSE Message : `${prefix}/message`, par exemple, `/mcp/user/message`
+- StreamableHTTP : `${prefix}/mcp`, par exemple, `/mcp/user/mcp`
 
 ### 3. Configuration CORS
 
