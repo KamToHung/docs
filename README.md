@@ -1,41 +1,67 @@
-# Website
+# 🚧 Documentation Under Construction
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Oops! You caught us during deployment 🙈  
+The official documentation is being built and deployed via Docusaurus.
 
-### Installation
+---
 
-```
-$ yarn
-```
+## 🔧 Possible Reasons
 
-### Local Development
+- The site is currently rebuilding via CI/CD
+- You accessed this page before the deployment finished
 
-```
-$ yarn start
-```
+---
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## 📘 Where to Find the Docs
 
-### Build
+Please try again in a few minutes, or visit:
 
-```
-$ yarn build
-```
+👉 [https://mcp.ifuryst.com/](https://mcp.ifuryst.com/)
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+---
 
-### Deployment
+## 🛠️ About This Project
 
-Using SSH:
+In the meantime, feel free to check out our GitHub repo:  
+👉 [https://github.com/mcp-ecosystem/mcp-gateway](https://github.com/mcp-ecosystem/mcp-gateway)
 
-```
-$ USE_SSH=true yarn deploy
-```
+---
 
-Not using SSH:
+## 🙏 Thanks for Your Patience!
 
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
+Docusaurus is working hard. Grab a coffee and come back soon ☕🚀
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+---
+
+# 🚧 文档施工中
+
+哎呀！你来的正是 CI/CD 构建的时刻 🙈  
+我们的官方文档正在由 Docusaurus 构建和部署中。
+
+---
+
+## 🔧 可能的原因
+
+- 当前文档站点正由 CI/CD 自动部署
+- 你访问的时间点刚好在构建过程中
+
+---
+
+## 📘 正确的文档地址
+
+请稍等几分钟再试，或者直接访问：
+
+👉 [https://mcp.ifuryst.com/](https://mcp.ifuryst.com/)
+
+---
+
+## 🛠️ 项目介绍
+
+在等待的这段时间，欢迎先访问我们的 GitHub 仓库：  
+👉 [https://github.com/mcp-ecosystem/mcp-gateway](https://github.com/mcp-ecosystem/mcp-gateway)
+
+---
+
+## 🙏 感谢你的耐心！
+
+Docusaurus 正在努力加载中，先喝杯咖啡休息一下吧 ☕🚀
