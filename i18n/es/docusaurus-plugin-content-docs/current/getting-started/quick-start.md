@@ -84,8 +84,10 @@ docker run -d \
 Una vez configurado, los servicios estarán disponibles en los siguientes puntos de conexión:
 
 - MCP SSE: http://localhost:5235/mcp/user/sse
-- MCP Streamable HTTP: http://localhost:5235/mcp/user/message
-- MCP: http://localhost:5235/mcp/user/mcp
+- MCP SSE Message: http://localhost:5235/mcp/user/message
+- MCP Streamable HTTP: http://localhost:5235/mcp/user/mcp
+
+Configure el cliente MCP con una URL que termine en `/sse` o `/mcp` para comenzar a usar el servicio.
 
 ## Pruebas
 

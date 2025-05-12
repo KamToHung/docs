@@ -84,8 +84,10 @@ docker run -d \
 配置完成后，服务将在以下端点可用：
 
 - MCP SSE: http://localhost:5235/mcp/user/sse
-- MCP Streamable HTTP: http://localhost:5235/mcp/user/message
-- MCP: http://localhost:5235/mcp/user/mcp
+- MCP SSE Message: http://localhost:5235/mcp/user/message
+- MCP Streamable HTTP: http://localhost:5235/mcp/user/mcp
+
+在MCP Client中配置`/sse`或`/mcp`后缀的url即可开始使用
 
 ## 测试
 

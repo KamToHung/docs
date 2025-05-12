@@ -84,8 +84,10 @@ docker run -d \
 設定が完了すると、以下のエンドポイントでサービスが利用可能になります：
 
 - MCP SSE: http://localhost:5235/mcp/user/sse
-- MCP Streamable HTTP: http://localhost:5235/mcp/user/message
-- MCP: http://localhost:5235/mcp/user/mcp
+- MCP SSE Message: http://localhost:5235/mcp/user/message
+- MCP Streamable HTTP: http://localhost:5235/mcp/user/mcp
+
+MCPクライアントで`/sse`または`/mcp`で終わるURLを設定すると、すぐに利用を開始できます。
 
 ## テスト
 
