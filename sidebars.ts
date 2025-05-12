@@ -37,6 +37,13 @@ const sidebars: SidebarsConfig = {
         'client-usage/cherry-studio',
       ],
     },
+    {
+      type: 'category',
+      label: '开发文档',
+      items: [
+        'development/architecture',
+      ],
+    },
   ],
 };
 
