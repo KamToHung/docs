@@ -14,5 +14,9 @@
   "sidebar.tutorialSidebar.category.客户端使用": {
     "message": "क्लाइंट उपयोग",
     "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.开发文档": {
+    "message": "विकास दस्तावेज़",
+    "description": "The label for category 开发文档 in sidebar tutorialSidebar"
   }
 }

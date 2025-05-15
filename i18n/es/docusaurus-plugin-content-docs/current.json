@@ -14,5 +14,9 @@
   "sidebar.tutorialSidebar.category.客户端使用": {
     "message": "Uso del Cliente",
     "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.开发文档": {
+    "message": "Documentación de Desarrollo",
+    "description": "The label for category 开发文档 in sidebar tutorialSidebar"
   }
 }

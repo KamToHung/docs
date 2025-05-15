@@ -14,5 +14,9 @@
   "sidebar.tutorialSidebar.category.客户端使用": {
     "message": "クライアントの使用方法",
     "description": "The label for category 客户端使用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.开发文档": {
+    "message": "開発ドキュメント",
+    "description": "The label for category 开发文档 in sidebar tutorialSidebar"
   }
 }
