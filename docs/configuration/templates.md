@@ -103,6 +103,23 @@ responseBody: |-
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. 处理复杂对象数据
+
+当需要将请求或者响应的对象、数组之类的复杂结构转成JSON的话，可以使用 `toJSON` 函数：
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+此处的`settings`是一个复杂对象，使用`toJSON`函数后，会自动将`settings`转换为JSON字符串
+
 ## 内置函数
 
 目前支持以下内置函数：
@@ -120,6 +137,11 @@ endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 3. `fromJSON`: 将 JSON 字符串转换为可遍历的对象
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: 将对象转换为 JSON 字符串
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 如果需要添加新的模板函数，可以

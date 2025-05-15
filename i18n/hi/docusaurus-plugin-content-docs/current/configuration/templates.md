@@ -103,6 +103,23 @@ responseBody: |-
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. जटिल ऑब्जेक्ट डेटा का संचालन
+
+जब आपको अनुरोध या प्रतिक्रियाओं में ऑब्जेक्ट या एरे जैसी जटिल संरचनाओं को JSON में बदलने की आवश्यकता होती है, तो आप `toJSON` फ़ंक्शन का उपयोग कर सकते हैं:
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+इस मामले में, `settings` एक जटिल ऑब्जेक्ट है जिसे `toJSON` फ़ंक्शन का उपयोग करके स्वचालित रूप से JSON स्ट्रिंग में बदल दिया जाएगा।
+
 ## अंतर्निहित फ़ंक्शन
 
 वर्तमान में समर्थित अंतर्निहित फ़ंक्शन:
@@ -120,6 +137,11 @@ endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 3. `fromJSON`: JSON स्ट्रिंग को पारगम्य वस्तु में बदलें
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: ऑब्जेक्ट को JSON स्ट्रिंग में बदलें
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 नए टेम्पलेट फ़ंक्शन जोड़ने के लिए:

@@ -103,6 +103,23 @@ This example demonstrates:
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. Handling Complex Object Data
+
+When you need to convert complex structures like objects or arrays in requests or responses to JSON, you can use the `toJSON` function:
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+In this case, `settings` is a complex object that will be automatically converted to a JSON string using the `toJSON` function.
+
 ## Built-in Functions
 
 Currently supported built-in functions:
@@ -120,6 +137,11 @@ Currently supported built-in functions:
 3. `fromJSON`: Convert JSON string to traversable object
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: Convert an object to a JSON string
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 To add new template functions:

@@ -103,6 +103,23 @@ responseBody: |-
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. 복잡한 객체 데이터 처리
+
+요청이나 응답의 복잡한 객체, 배열과 같은 구조를 JSON으로 변환해야 할 때는 `toJSON` 함수를 사용할 수 있습니다:
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+이 경우, `settings`는 복잡한 객체로, `toJSON` 함수를 사용하면 자동으로 JSON 문자열로 변환됩니다.
+
 ## 내장 함수
 
 현재 지원되는 내장 함수:
@@ -120,6 +137,11 @@ endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 3. `fromJSON`: JSON 문자열을 순회 가능한 객체로 변환
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: 객체를 JSON 문자열로 변환
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 새로운 템플릿 함수를 추가하려면:

@@ -103,6 +103,23 @@ Este ejemplo demuestra:
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. Manejar datos de objetos complejos
+
+Cuando necesites convertir estructuras complejas como objetos o arrays en solicitudes o respuestas a JSON, puedes usar la función `toJSON`:
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+En este caso, `settings` es un objeto complejo que será convertido automáticamente a una cadena JSON usando la función `toJSON`.
+
 ## Funciones incorporadas
 
 Funciones incorporadas actualmente soportadas:
@@ -120,6 +137,11 @@ Funciones incorporadas actualmente soportadas:
 3. `fromJSON`: Convertir cadena JSON en objeto recorrible
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: Convertir un objeto a cadena JSON
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 Para agregar nuevas funciones de plantilla:

@@ -103,6 +103,23 @@ responseBody: |-
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. 複雑なオブジェクトデータの処理
+
+リクエストやレスポンスの複雑なオブジェクトや配列などの構造をJSONに変換する必要がある場合は、`toJSON`関数を使用できます：
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+この場合、`settings`は複雑なオブジェクトであり、`toJSON`関数を使用すると自動的にJSON文字列に変換されます。
+
 ## 組み込み関数
 
 現在サポートされている組み込み関数：
@@ -120,6 +137,11 @@ endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 3. `fromJSON`: JSON 文字列を走査可能なオブジェクトに変換
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: オブジェクトをJSON文字列に変換
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 新しいテンプレート関数を追加するには：

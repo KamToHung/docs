@@ -103,6 +103,23 @@ Dieses Beispiel zeigt:
 endpoint: "http://localhost:5236/users/{{.Args.email}}/preferences"
 ```
 
+### 8. Komplexe Objektdaten verarbeiten
+
+Wenn Sie komplexe Strukturen wie Objekte oder Arrays in Anfragen oder Antworten in JSON umwandeln müssen, können Sie die Funktion `toJSON` verwenden:
+
+```yaml
+requestBody: |-
+  {
+    "isPublic": {{.Args.isPublic}},
+    "showEmail": {{.Args.showEmail}},
+    "theme": "{{.Args.theme}}",
+    "tags": {{.Args.tags}},
+    "settings": {{ toJSON .Args.settings }}
+  }
+```
+
+In diesem Fall ist `settings` ein komplexes Objekt, das mit der Funktion `toJSON` automatisch in einen JSON-String umgewandelt wird.
+
 ## Eingebaute Funktionen
 
 Aktuell unterstützte eingebaute Funktionen:
@@ -120,6 +137,11 @@ Aktuell unterstützte eingebaute Funktionen:
 3. `fromJSON`: JSON-String in durchsuchbares Objekt konvertieren
    ```yaml
    {{- $rows := fromJSON .Response.Data.rows }}
+   ```
+
+4. `toJSON`: Objekt in JSON-String konvertieren
+   ```yaml
+   "settings": {{ toJSON .Args.settings }}
    ```
 
 Um neue Template-Funktionen hinzuzufügen:
