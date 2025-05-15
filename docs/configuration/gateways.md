@@ -477,3 +477,171 @@ tools:
     - 每个配置单独存储为一个 YAML 文件
     - 类似 Nginx 的 vhost 配置方式
     - 文件名建议使用服务名称，如 `mock-user-svc.yaml`
+
+## MCP 服务代理配置
+
+除了代理 HTTP 服务外，MCP Gateway 还支持代理 MCP 服务，目前 stdio、SSE 和 streamable-http 三种传输协议都已支持
+
+### 配置示例
+
+以下是一个完整的 MCP 服务代理配置示例：
+
+```yaml
+name: "proxy-mcp-exp"
+tenant: "default"
+
+routers:
+  - server: "amap-maps"
+    prefix: "/mcp/stdio-proxy"
+    cors:
+      allowOrigins:
+        - "*"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "OPTIONS"
+      allowHeaders:
+        - "Content-Type"
+        - "Authorization"
+        - "Mcp-Session-Id"
+      exposeHeaders:
+        - "Mcp-Session-Id"
+      allowCredentials: true
+  - server: "mock-user-sse"
+    prefix: "/mcp/sse-proxy"
+    cors:
+      allowOrigins:
+        - "*"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "OPTIONS"
+      allowHeaders:
+        - "Content-Type"
+        - "Authorization"
+        - "Mcp-Session-Id"
+      exposeHeaders:
+        - "Mcp-Session-Id"
+      allowCredentials: true
+  - server: "mock-user-mcp"
+    prefix: "/mcp/streamable-http-proxy"
+    cors:
+      allowOrigins:
+        - "*"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "OPTIONS"
+      allowHeaders:
+        - "Content-Type"
+        - "Authorization"
+        - "Mcp-Session-Id"
+      exposeHeaders:
+        - "Mcp-Session-Id"
+      allowCredentials: true
+
+mcpServers:
+  - type: "stdio"
+    name: "amap-maps"
+    command: "npx"
+    args:
+      - "-y"
+      - "@amap/amap-maps-mcp-server"
+    env:
+      AMAP_MAPS_API_KEY: "{{.Request.Headers.Apikey}}"
+
+  - type: "sse"
+    name: "mock-user-sse"
+    url: "http://localhost:3000/mcp/user/sse"
+
+  - type: "streamable-http"
+    name: "mock-user-mcp"
+    url: "http://localhost:3000/mcp/user/mcp"
+```
+
+### 配置说明
+
+#### 1. MCP 服务类型
+
+MCP Gateway 支持以下三种类型的 MCP 服务代理：
+
+1. **stdio 类型**：
+   - 通过标准输入输出与 MCP 服务进程通信
+   - 适用于需要本地启动的 MCP 服务，如第三方 SDK
+   - 配置参数包括 `command`、`args` 和 `env`
+
+2. **SSE 类型**：
+   - 将 MCP 客户端的请求转发到支持 SSE 的上游服务
+   - 适用于已有的支持 SSE 协议的 MCP 服务
+   - 仅需配置 `url` 参数指向上游 SSE 服务地址
+
+3. **streamable-http 类型**：
+   - 将 MCP 客户端的请求转发到支持可流式 HTTP 的上游服务
+   - 适用于已有的支持 MCP 协议的上游服务
+   - 仅需配置 `url` 参数指向上游 MCP 服务地址
+
+#### 2. stdio 类型配置
+
+stdio 类型的 MCP 服务配置示例：
+
+```yaml
+mcpServers:
+  - type: "stdio"
+    name: "amap-maps"                                   # 服务名称
+    command: "npx"                                      # 要执行的命令
+    args:                                               # 命令参数
+      - "-y"
+      - "@amap/amap-maps-mcp-server"
+    env:                                                # 环境变量
+      AMAP_MAPS_API_KEY: "{{.Request.Headers.Apikey}}"  # 从请求头中提取值
+```
+
+通过 `env` 字段可以设置环境变量，支持从请求中提取值，例如 `{{.Request.Headers.Apikey}}` 表示从请求头中提取 Apikey 的值
+
+#### 3. SSE 类型配置
+
+SSE 类型的 MCP 服务配置示例：
+
+```yaml
+mcpServers:
+  - type: "sse"
+    name: "mock-user-sse"                       # 服务名称
+    url: "http://localhost:3000/mcp/user/sse"   # 上游 SSE 服务地址，通常以/sse结尾，实际根据上游服务而定
+```
+
+#### 4. streamable-http 类型配置
+
+streamable-http 类型的 MCP 服务配置示例：
+
+```yaml
+mcpServers:
+  - type: "streamable-http"
+    name: "mock-user-mcp"                       # 服务名称
+    url: "http://localhost:3000/mcp/user/mcp"   # 上游 MCP 服务地址，通常以/mcp结尾，实际根据上游服务而定
+```
+
+#### 5. 路由配置
+
+对于 MCP 服务代理，路由配置与 HTTP 服务代理类似，CORS 则根据实际情况配置（通常生产环境一般是不会开启跨域的）：
+
+```yaml
+routers:
+  - server: "amap-maps"           # 服务名称，需要与 mcpServers 中的 name 保持一致
+    prefix: "/mcp/stdio-proxy"    # 路由前缀，全局唯一
+    cors:
+      allowOrigins:
+        - "*"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "OPTIONS"
+      allowHeaders:
+        - "Content-Type"
+        - "Authorization"
+        - "Mcp-Session-Id"        # MCP 服务必须包含此头
+      exposeHeaders:
+        - "Mcp-Session-Id"        # MCP 服务必须暴露此头
+      allowCredentials: true
+```
+
+对于 MCP 服务，请求头和响应头中的 `Mcp-Session-Id` 是必须要支持的，否则客户端无法正常使用。
