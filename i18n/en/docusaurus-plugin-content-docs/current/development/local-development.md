@@ -112,6 +112,5 @@ export APISERVER_JWT_SECRET_KEY="your_secret_key"
 
 After successfully starting the local development environment, you can:
 
-- Check the [Architecture Documentation](./architecture.md) to understand system components in depth
-- Read the [Configuration Guide](/docs/configuration/) to learn how to configure the gateway
-- View the [Client Usage Documentation](/docs/client-usage/) to understand how to interact with the gateway 
+- Check the [Architecture Documentation](./architecture) to understand system components in depth
+- Read the [Configuration Guide](../configuration/gateways) to learn how to configure the gateway 

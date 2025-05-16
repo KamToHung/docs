@@ -42,6 +42,7 @@ const sidebars: SidebarsConfig = {
       label: '开发文档',
       items: [
         'development/architecture',
+        'development/local-development',
       ],
     },
   ],

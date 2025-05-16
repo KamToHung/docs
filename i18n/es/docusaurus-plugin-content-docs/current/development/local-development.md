@@ -112,6 +112,5 @@ export APISERVER_JWT_SECRET_KEY="tu_clave_secreta"
 
 Después de iniciar exitosamente el entorno de desarrollo local, puedes:
 
-- Revisar la [Documentación de Arquitectura](./architecture.md) para entender los componentes del sistema en profundidad
-- Leer la [Guía de Configuración](/docs/configuration/) para aprender cómo configurar la puerta de enlace
-- Ver la [Documentación de Uso del Cliente](/docs/client-usage/) para entender cómo interactuar con la puerta de enlace 
+- Revisar la [Documentación de Arquitectura](./architecture) para entender los componentes del sistema en profundidad
+- Leer la [Guía de Configuración](../configuration/gateways) para aprender cómo configurar la puerta de enlace 

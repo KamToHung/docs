@@ -93,7 +93,7 @@ npm run dev
 
 웹 프론트엔드는 기본적으로 `http://localhost:5236`에서 시작됩니다.
 
-이제 브라우저에서 http://localhost:5236으로 접속하여 관리 인터페이스를 이용할 수 있습니다. 기본 사용자 이름과 비밀번호는 환경 변수(루트 디렉토리의 .env 파일)에 의해 결정되며, 구체적으로는 `SUPER_ADMIN_USERNAME`과 `SUPER_ADMIN_PASSWORD`입니다. 로그인 후 관리 인터페이스에서 사용자 이름과 비밀번호를 변경할 수 있습니다.
+이제 브라우저에서 http://localhost:5236 접속하여 관리 인터페이스를 이용할 수 있습니다. 기본 사용자 이름과 비밀번호는 환경 변수(루트 디렉토리의 .env 파일)에 의해 결정되며, 구체적으로는 `SUPER_ADMIN_USERNAME`과 `SUPER_ADMIN_PASSWORD`입니다. 로그인 후 관리 인터페이스에서 사용자 이름과 비밀번호를 변경할 수 있습니다.
 
 ## 일반적인 문제
 
@@ -112,6 +112,5 @@ export APISERVER_JWT_SECRET_KEY="당신의_비밀_키"
 
 로컬 개발 환경을 성공적으로 시작한 후, 다음을 수행할 수 있습니다:
 
-- [아키텍처 문서](./architecture.md)를 확인하여 시스템 구성 요소를 깊이 이해하기
-- [구성 가이드](/docs/configuration/)를 읽고 게이트웨이 구성 방법 학습하기
-- [클라이언트 사용 문서](/docs/client-usage/)를 보고 게이트웨이와 상호 작용하는 방법 이해하기 
+- [아키텍처 문서](./architecture)를 확인하여 시스템 구성 요소를 깊이 이해하기
+- [구성 가이드](../configuration/gateways)를 읽고 게이트웨이 구성 방법 학습하기 

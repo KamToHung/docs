@@ -112,6 +112,5 @@ export APISERVER_JWT_SECRET_KEY="votre_clé_secrète"
 
 Après avoir réussi à démarrer l'environnement de développement local, vous pouvez :
 
-- Consulter la [Documentation d'Architecture](./architecture.md) pour comprendre les composants du système en profondeur
-- Lire le [Guide de Configuration](/docs/configuration/) pour apprendre comment configurer la passerelle
-- Voir la [Documentation d'Utilisation Client](/docs/client-usage/) pour comprendre comment interagir avec la passerelle 
+- Consulter la [Documentation d'Architecture](./architecture) pour comprendre les composants du système en profondeur
+- Lire le [Guide de Configuration](../configuration/gateways) pour apprendre comment configurer la passerelle 

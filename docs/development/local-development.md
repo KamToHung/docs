@@ -114,6 +114,5 @@ export APISERVER_JWT_SECRET_KEY="your_secret_key"
 
 成功启动本地开发环境后，你可以：
 
-- 查看 [架构文档](./architecture.md) 深入了解系统组件
-- 阅读 [配置指南](/docs/configuration/) 学习如何配置网关
-- 查看 [客户端使用文档](/docs/client-usage/) 了解如何与网关交互 
+- 查看 [架构文档](./architecture) 深入了解系统组件
+- 阅读 [配置指南](../configuration/gateways) 学习如何配置网关

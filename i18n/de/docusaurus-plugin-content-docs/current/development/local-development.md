@@ -112,6 +112,5 @@ export APISERVER_JWT_SECRET_KEY="ihr_geheimer_schlüssel"
 
 Nach dem erfolgreichen Start der lokalen Entwicklungsumgebung können Sie:
 
-- Die [Architekturdokumentation](./architecture.md) überprüfen, um die Systemkomponenten im Detail zu verstehen
-- Den [Konfigurationsleitfaden](/docs/configuration/) lesen, um zu erfahren, wie Sie das Gateway konfigurieren
-- Die [Client-Nutzungsdokumentation](/docs/client-usage/) ansehen, um zu verstehen, wie Sie mit dem Gateway interagieren 
+- Die [Architekturdokumentation](./architecture) überprüfen, um die Systemkomponenten im Detail zu verstehen
+- Den [Konfigurationsleitfaden](../configuration/gateways) lesen, um zu erfahren, wie Sie das Gateway konfigurieren 
