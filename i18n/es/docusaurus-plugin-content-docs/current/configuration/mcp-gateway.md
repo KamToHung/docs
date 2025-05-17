@@ -28,7 +28,7 @@ storage:
   
   # Configuración de base de datos (usado cuando type es 'db')
   database:
-    type: "${GATEWAY_DB_TYPE:sqlite}"                   # Tipo de base de datos (sqlite,postgres, myslq)
+    type: "${GATEWAY_DB_TYPE:sqlite}"                   # Tipo de base de datos (sqlite,postgres, mysql)
     host: "${GATEWAY_DB_HOST:localhost}"                # Dirección del host de la base de datos
     port: ${GATEWAY_DB_PORT:5432}                       # Puerto de la base de datos
     user: "${GATEWAY_DB_USER:postgres}"                 # Usuario de la base de datos

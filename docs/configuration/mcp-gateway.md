@@ -28,7 +28,7 @@ storage:
   
   # 数据库配置（当 type 为 'db' 时使用）
   database:
-    type: "${GATEWAY_DB_TYPE:sqlite}"                   # 数据库类型（sqlite,postgres, myslq）
+    type: "${GATEWAY_DB_TYPE:sqlite}"                   # 数据库类型（sqlite,postgres, mysql）
     host: "${GATEWAY_DB_HOST:localhost}"                # 数据库主机地址
     port: ${GATEWAY_DB_PORT:5432}                       # 数据库端口
     user: "${GATEWAY_DB_USER:postgres}"                 # 数据库用户名
