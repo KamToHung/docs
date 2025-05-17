@@ -28,7 +28,7 @@ storage:
   
   # डेटाबेस कॉन्फ़िगरेशन (जब type 'db' हो)
   database:
-    type: "${GATEWAY_DB_TYPE:sqlite}"                   # डेटाबेस प्रकार (sqlite,postgres, myslq)
+    type: "${GATEWAY_DB_TYPE:sqlite}"                   # डेटाबेस प्रकार (sqlite,postgres, mysql)
     host: "${GATEWAY_DB_HOST:localhost}"                # डेटाबेस होस्ट पता
     port: ${GATEWAY_DB_PORT:5432}                       # डेटाबेस पोर्ट
     user: "${GATEWAY_DB_USER:postgres}"                 # डेटाबेस उपयोगकर्ता नाम
