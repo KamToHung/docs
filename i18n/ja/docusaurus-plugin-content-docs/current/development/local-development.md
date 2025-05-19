@@ -114,3 +114,44 @@ export APISERVER_JWT_SECRET_KEY="あなたのシークレットキー"
 
 - [アーキテクチャドキュメント](./architecture)を確認して、システムコンポーネントを詳しく理解する
 - [設定ガイド](../configuration/gateways)を読んで、ゲートウェイの設定方法を学ぶ 
+
+## コード貢献のワークフロー
+
+新機能の開発やバグ修正を始める前に、以下の手順で開発環境をセットアップしてください：
+
+1. フォークしたリポジトリをローカルにクローン：
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. アップストリームリポジトリの追加：
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. アップストリームコードとの同期：
+```bash
+git pull upstream main
+```
+
+4. フォークリポジトリへの更新のプッシュ（オプション）：
+```bash
+git push origin main
+```
+
+5. 新機能ブランチの作成：
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. 開発完了後、ブランチをフォークリポジトリにプッシュ：
+```bash
+git push origin feat/your-feature-name
+```
+
+7. GitHubでプルリクエストを作成し、ブランチをメインリポジトリのmainブランチにマージします。
+
+**ヒント**：
+- ブランチ命名規則：新機能には`feat/`プレフィックス、バグ修正には`fix/`プレフィックスを使用
+- PRを提出する前に、コードがすべてのテストをパスすることを確認してください
+- コードの競合を避けるため、フォークリポジトリをアップストリームリポジトリと同期させておくことをお勧めします 

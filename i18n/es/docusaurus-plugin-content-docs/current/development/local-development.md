@@ -114,3 +114,44 @@ Después de iniciar exitosamente el entorno de desarrollo local, puedes:
 
 - Revisar la [Documentación de Arquitectura](./architecture) para entender los componentes del sistema en profundidad
 - Leer la [Guía de Configuración](../configuration/gateways) para aprender cómo configurar la puerta de enlace 
+
+## Flujo de Trabajo para Contribuir Código
+
+Antes de comenzar a desarrollar nuevas características o corregir errores, siga estos pasos para configurar su entorno de desarrollo:
+
+1. Clone su repositorio fork localmente:
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. Agregue el repositorio upstream:
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. Sincronice con el código upstream:
+```bash
+git pull upstream main
+```
+
+4. Envíe las actualizaciones a su repositorio fork (opcional):
+```bash
+git push origin main
+```
+
+5. Cree una nueva rama de características:
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. Después del desarrollo, envíe su rama al repositorio fork:
+```bash
+git push origin feat/your-feature-name
+```
+
+7. Cree un Pull Request en GitHub para fusionar su rama en la rama main del repositorio principal.
+
+**Consejos**:
+- Convención de nombres de ramas: use el prefijo `feat/` para nuevas características, `fix/` para correcciones de errores
+- Asegúrese de que su código pase todas las pruebas antes de enviar un PR
+- Mantenga su repositorio fork sincronizado con el repositorio upstream para evitar conflictos de código 

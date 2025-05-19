@@ -114,3 +114,44 @@ Après avoir réussi à démarrer l'environnement de développement local, vous 
 
 - Consulter la [Documentation d'Architecture](./architecture) pour comprendre les composants du système en profondeur
 - Lire le [Guide de Configuration](../configuration/gateways) pour apprendre comment configurer la passerelle 
+
+## Flux de Travail pour Contribuer au Code
+
+Avant de commencer à développer de nouvelles fonctionnalités ou à corriger des bugs, suivez ces étapes pour configurer votre environnement de développement :
+
+1. Clonez votre dépôt fork localement :
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. Ajoutez le dépôt upstream :
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. Synchronisez avec le code upstream :
+```bash
+git pull upstream main
+```
+
+4. Poussez les mises à jour vers votre dépôt fork (optionnel) :
+```bash
+git push origin main
+```
+
+5. Créez une nouvelle branche de fonctionnalité :
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. Après le développement, poussez votre branche vers le dépôt fork :
+```bash
+git push origin feat/your-feature-name
+```
+
+7. Créez une Pull Request sur GitHub pour fusionner votre branche dans la branche main du dépôt principal.
+
+**Conseils** :
+- Convention de nommage des branches : utilisez le préfixe `feat/` pour les nouvelles fonctionnalités, `fix/` pour les corrections de bugs
+- Assurez-vous que votre code passe tous les tests avant de soumettre une PR
+- Gardez votre dépôt fork synchronisé avec le dépôt upstream pour éviter les conflits de code 

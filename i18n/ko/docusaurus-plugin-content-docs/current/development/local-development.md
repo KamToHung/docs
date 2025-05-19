@@ -113,4 +113,45 @@ export APISERVER_JWT_SECRET_KEY="당신의_비밀_키"
 로컬 개발 환경을 성공적으로 시작한 후, 다음을 수행할 수 있습니다:
 
 - [아키텍처 문서](./architecture)를 확인하여 시스템 구성 요소를 깊이 이해하기
-- [구성 가이드](../configuration/gateways)를 읽고 게이트웨이 구성 방법 학습하기 
+- [구성 가이드](../configuration/gateways)를 읽고 게이트웨이 구성 방법 학습하기
+
+## 코드 기여 워크플로우
+
+새로운 기능 개발이나 버그 수정을 시작하기 전에 다음 단계에 따라 개발 환경을 설정하세요:
+
+1. 포크한 저장소를 로컬에 클론:
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. 업스트림 저장소 추가:
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. 업스트림 코드와 동기화:
+```bash
+git pull upstream main
+```
+
+4. 포크 저장소에 업데이트 푸시 (선택사항):
+```bash
+git push origin main
+```
+
+5. 새로운 기능 브랜치 생성:
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. 개발 완료 후, 브랜치를 포크 저장소에 푸시:
+```bash
+git push origin feat/your-feature-name
+```
+
+7. GitHub에서 Pull Request를 생성하여 브랜치를 메인 저장소의 main 브랜치에 병합합니다.
+
+**팁**:
+- 브랜치 명명 규칙: 새 기능은 `feat/` 접두사, 버그 수정은 `fix/` 접두사 사용
+- PR을 제출하기 전에 코드가 모든 테스트를 통과하는지 확인하세요
+- 코드 충돌을 피하기 위해 포크 저장소를 업스트림 저장소와 동기화 상태로 유지하세요 

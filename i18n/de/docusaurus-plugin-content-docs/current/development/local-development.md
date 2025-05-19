@@ -114,3 +114,44 @@ Nach dem erfolgreichen Start der lokalen Entwicklungsumgebung können Sie:
 
 - Die [Architekturdokumentation](./architecture) überprüfen, um die Systemkomponenten im Detail zu verstehen
 - Den [Konfigurationsleitfaden](../configuration/gateways) lesen, um zu erfahren, wie Sie das Gateway konfigurieren 
+
+## Workflow für Code-Beiträge
+
+Bevor Sie mit der Entwicklung neuer Funktionen oder der Fehlerbehebung beginnen, folgen Sie bitte diesen Schritten, um Ihre Entwicklungsumgebung einzurichten:
+
+1. Klonen Sie Ihr Fork-Repository lokal:
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. Fügen Sie das Upstream-Repository hinzu:
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. Synchronisieren Sie mit dem Upstream-Code:
+```bash
+git pull upstream main
+```
+
+4. Pushen Sie Updates zu Ihrem Fork-Repository (optional):
+```bash
+git push origin main
+```
+
+5. Erstellen Sie einen neuen Feature-Branch:
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. Nach der Entwicklung, pushen Sie Ihren Branch zum Fork-Repository:
+```bash
+git push origin feat/your-feature-name
+```
+
+7. Erstellen Sie einen Pull Request auf GitHub, um Ihren Branch in den main-Branch des Hauptrepositories zu mergen.
+
+**Tipps**:
+- Branch-Namenskonvention: Verwenden Sie das Präfix `feat/` für neue Funktionen, `fix/` für Fehlerbehebungen
+- Stellen Sie sicher, dass Ihr Code alle Tests besteht, bevor Sie einen PR einreichen
+- Halten Sie Ihr Fork-Repository mit dem Upstream-Repository synchron, um Code-Konflikte zu vermeiden 

@@ -116,3 +116,44 @@ export APISERVER_JWT_SECRET_KEY="your_secret_key"
 
 - 查看 [架构文档](./architecture) 深入了解系统组件
 - 阅读 [配置指南](../configuration/gateways) 学习如何配置网关
+
+## 贡献代码流程
+
+在开始开发新功能或修复 bug 之前，请按照以下步骤设置你的开发环境：
+
+1. 克隆你的 fork 仓库到本地：
+```bash
+git clone https://github.com/your-github-username/mcp-gateway.git
+```
+
+2. 添加上游仓库：
+```bash
+git remote add upstream git@github.com:mcp-ecosystem/mcp-gateway.git
+```
+
+3. 同步上游代码：
+```bash
+git pull upstream main
+```
+
+4. 推送更新到你的 fork 仓库（可选）：
+```bash
+git push origin main
+```
+
+5. 创建新的功能分支：
+```bash
+git switch -c feat/your-feature-name
+```
+
+6. 开发完成后，推送你的分支到 fork 仓库：
+```bash
+git push origin feat/your-feature-name
+```
+
+7. 在 GitHub 上创建 Pull Request，将你的分支合并到主仓库的 main 分支。
+
+**提示**：
+- 分支命名建议使用 `feat/` 前缀表示新功能，`fix/` 前缀表示 bug 修复
+- 在提交 PR 之前，确保你的代码已经通过所有测试
+- 保持你的 fork 仓库与上游仓库同步，避免代码冲突
