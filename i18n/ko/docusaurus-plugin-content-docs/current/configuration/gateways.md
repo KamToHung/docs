@@ -5,11 +5,11 @@
 다음은 라우팅, CORS, 응답 처리 등을 포함한 완전한 구성 예제입니다:
 
 ```yaml
-name: "mock-user-svc"                 # 프록시 서비스 이름, 전역적으로 고유함
+name: "mock-server"             # 프록시 서비스 이름, 전역적으로 고유함
 
 # 라우터 구성
 routers:
-  - server: "mock-user-svc"     # 서비스 이름
+  - server: "mock-server"       # 서비스 이름
     prefix: "/mcp/user"         # 라우트 접두사, 전역적으로 고유함, 중복 불가, 서비스 또는 도메인+모듈로 구분하는 것이 좋음
 
     # CORS 구성
@@ -44,7 +44,7 @@ routers:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # 서비스 이름, servers의 이름과 일치해야 함
+  - server: "mock-server"       # 서비스 이름, servers의 이름과 일치해야 함
     prefix: "/mcp/user"         # 라우트 접두사, 전역적으로 고유함, 중복 불가
 ```
 

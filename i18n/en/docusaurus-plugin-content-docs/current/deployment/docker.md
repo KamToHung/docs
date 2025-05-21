@@ -41,9 +41,9 @@ docker pull ghcr.io/mcp-ecosystem/mcp-gateway/mcp-gateway:latest
 docker pull registry.ap-southeast-1.aliyuncs.com/mcp-ecosystem/mcp-gateway-mcp-gateway:latest
 
 # Mock User Service
-docker pull docker.io/ifuryst/mcp-gateway-mock-user-svc:latest
-docker pull ghcr.io/mcp-ecosystem/mcp-gateway/mock-user-svc:latest
-docker pull registry.ap-southeast-1.aliyuncs.com/mcp-ecosystem/mcp-gateway-mock-user-svc:latest
+docker pull docker.io/ifuryst/mcp-gateway-mock-server:latest
+docker pull ghcr.io/mcp-ecosystem/mcp-gateway/mock-server:latest
+docker pull registry.ap-southeast-1.aliyuncs.com/mcp-ecosystem/mcp-gateway-mock-server:latest
 
 # Web Frontend
 docker pull docker.io/ifuryst/mcp-gateway-web:latest

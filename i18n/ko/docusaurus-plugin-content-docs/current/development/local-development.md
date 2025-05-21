@@ -17,7 +17,7 @@ MCP Gateway 프로젝트는 다음과 같은 핵심 구성 요소로 이루어�
 
 1. **apiserver** - 구성 관리, 사용자 인터페이스 및 기타 API 서비스 제공
 2. **mcp-gateway** - 코어 게이트웨이 서비스, MCP 프로토콜 변환 처리
-3. **mock-user-svc** - 개발 테스트를 위한 사용자 서비스 시뮬레이션
+3. **mock-server** - 개발 테스트를 위한 사용자 서비스 시뮬레이션
 4. **web** - 관리 인터페이스 프론트엔드
 
 ## 개발 환경 시작하기
@@ -77,13 +77,13 @@ go run cmd/apiserver/main.go
 
 apiserver는 기본적으로 `http://localhost:5234`에서 시작됩니다.
 
-#### 4.3 mock-user-svc 시작
+#### 4.3 mock-server 시작
 
 ```bash
-go run cmd/mock-user-svc/main.go
+go run cmd/mock-server/main.go
 ```
 
-mock-user-svc는 기본적으로 `http://localhost:5235`에서 시작됩니다.
+mock-server는 기본적으로 `http://localhost:5235`에서 시작됩니다.
 
 #### 4.4 웹 프론트엔드 시작
 

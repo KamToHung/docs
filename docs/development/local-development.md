@@ -17,7 +17,7 @@ MCP Gateway 项目由以下几个核心组件组成：
 
 1. **apiserver** - 提供配置管理、用户接口等 API 服务
 2. **mcp-gateway** - 核心网关服务，处理 MCP 协议转换
-3. **mock-user-svc** - 模拟用户服务，用于开发测试
+3. **mock-server** - 模拟用户服务，用于开发测试
 4. **web** - 管理界面前端
 
 ## 启动开发环境
@@ -78,13 +78,13 @@ go run cmd/apiserver/main.go
 
 apiserver 默认会在 `http://localhost:5234` 上启动。
 
-#### 4.3 启动 mock-user-svc
+#### 4.3 启动 mock-server
 
 ```bash
-go run cmd/mock-user-svc/main.go
+go run cmd/mock-server/main.go
 ```
 
-mock-user-svc 默认会在 `http://localhost:5235` 上启动。
+mock-server 默认会在 `http://localhost:5235` 上启动。
 
 #### 4.4 启动 web 前端
 

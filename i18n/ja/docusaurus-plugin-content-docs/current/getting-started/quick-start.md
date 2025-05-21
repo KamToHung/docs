@@ -73,7 +73,7 @@ docker run -d \
    - 設定した管理者認証情報でログイン
 
 2. 新しい MCP Server を追加：
-   - 設定ファイルをコピー：https://github.com/mcp-ecosystem/mcp-gateway/blob/main/configs/mock-user-svc.yaml
+   - 設定ファイルをコピー：https://github.com/mcp-ecosystem/mcp-gateway/blob/main/configs/mock-server.yaml
    - Web UI で「Add MCP Server」をクリック
    - 設定を貼り付けて保存
 

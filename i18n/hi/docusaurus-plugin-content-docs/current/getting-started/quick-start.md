@@ -73,7 +73,7 @@ docker run -d \
    - कॉन्फ़िगर किए गए एडमिन क्रेडेंशियल्स से लॉगिन करें
 
 2. नया MCP सर्वर जोड़ें:
-   - कॉन्फ़िगरेशन फ़ाइल कॉपी करें: https://github.com/mcp-ecosystem/mcp-gateway/blob/main/configs/mock-user-svc.yaml
+   - कॉन्फ़िगरेशन फ़ाइल कॉपी करें: https://github.com/mcp-ecosystem/mcp-gateway/blob/main/configs/mock-server.yaml
    - वेब UI में "Add MCP Server" पर क्लिक करें
    - कॉन्फ़िगरेशन पेस्ट करें और सेव करें
 

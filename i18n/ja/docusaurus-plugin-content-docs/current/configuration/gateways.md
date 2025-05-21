@@ -5,11 +5,11 @@
 以下は、ルーティング、CORS、レスポンス処理などを含む完全な設定例です：
 
 ```yaml
-name: "mock-user-svc"                 # プロキシサービス名、グローバルに一意
+name: "mock-server"             # プロキシサービス名、グローバルに一意
 
 # ルーター設定
 routers:
-  - server: "mock-user-svc"     # サービス名
+  - server: "mock-server"       # サービス名
     prefix: "/mcp/user"         # ルートプレフィックス、グローバルに一意、重複不可、サービスまたはドメイン+モジュールで区別することを推奨
 
     # CORS設定
@@ -44,7 +44,7 @@ routers:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # サービス名、serversの名前と一致する必要がある
+  - server: "mock-server"       # サービス名、serversの名前と一致する必要がある
     prefix: "/mcp/user"         # ルートプレフィックス、グローバルに一意、重複不可
 ```
 

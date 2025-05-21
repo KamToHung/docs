@@ -5,11 +5,11 @@
 Nachfolgend finden Sie ein vollständiges Konfigurationsbeispiel, das Routing, CORS, Antwortverarbeitung und andere Einstellungen umfasst:
 
 ```yaml
-name: "mock-user-svc"                 # Proxy-Dienstname, global eindeutig
+name: "mock-server"             # Proxy-Dienstname, global eindeutig
 
 # Router-Konfiguration
 routers:
-  - server: "mock-user-svc"     # Dienstname
+  - server: "mock-server"       # Dienstname
     prefix: "/mcp/user"         # Routenpräfix, global eindeutig, kann nicht wiederholt werden, empfohlen zur Unterscheidung nach Dienst oder Domäne+Modul
 
     # CORS-Konfiguration
@@ -44,7 +44,7 @@ Die Router-Konfiguration wird verwendet, um Anfrageweiterleitungsregeln zu defin
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Dienstname, muss mit dem Namen in servers übereinstimmen
+  - server: "mock-server"       # Dienstname, muss mit dem Namen in servers übereinstimmen
     prefix: "/mcp/user"         # Routenpräfix, global eindeutig, kann nicht wiederholt werden
 ```
 

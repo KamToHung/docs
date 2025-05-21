@@ -5,11 +5,11 @@
 A continuación se muestra un ejemplo completo de configuración, que incluye enrutamiento, CORS, manejo de respuestas y otras configuraciones:
 
 ```yaml
-name: "mock-user-svc"                 # Nombre del servicio proxy, único globalmente
+name: "mock-server"             # Nombre del servicio proxy, único globalmente
 
 # Configuración del Router
 routers:
-  - server: "mock-user-svc"     # Nombre del servicio
+  - server: "mock-server"       # Nombre del servicio
     prefix: "/mcp/user"         # Prefijo de ruta, único globalmente, no puede repetirse, se recomienda distinguir por servicio o dominio+módulo
 
     # Configuración CORS
@@ -44,7 +44,7 @@ La configuración del router se utiliza para definir reglas de reenvío de solic
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Nombre del servicio, debe ser coherente con el nombre en servers
+  - server: "mock-server"       # Nombre del servicio, debe ser coherente con el nombre en servers
     prefix: "/mcp/user"         # Prefijo de ruta, único globalmente, no puede repetirse
 ```
 

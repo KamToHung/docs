@@ -5,11 +5,11 @@
 Voici un exemple complet de configuration, incluant le routage, CORS, le traitement des réponses et d'autres paramètres :
 
 ```yaml
-name: "mock-user-svc"                 # Nom du service proxy, unique globalement
+name: "mock-server"             # Nom du service proxy, unique globalement
 
 # Configuration du Routeur
 routers:
-  - server: "mock-user-svc"     # Nom du service
+  - server: "mock-server"       # Nom du service
     prefix: "/mcp/user"         # Préfixe de route, unique globalement, ne peut pas être répété, recommandé de distinguer par service ou domaine+module
 
     # Configuration CORS
@@ -30,7 +30,7 @@ routers:
 
 # Configuration du Serveur
 servers:
-  - name: "mock-user-svc"             # Nom du service, doit être cohérent avec le serveur dans routers
+  - name: "mock-server"               # Nom du service, doit être cohérent avec le serveur dans routers
     namespace: "user-service"         # Espace de noms du service, utilisé pour le regroupement des services
     description: "Mock User Service"  # Description du service
     allowedTools:                     # Liste des outils autorisés (sous-ensemble d'outils)
@@ -203,7 +203,7 @@ La configuration du routeur est utilisée pour définir les règles de transfert
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Nom du service, doit être cohérent avec le nom dans servers
+  - server: "mock-server"       # Nom du service, doit être cohérent avec le nom dans servers
     prefix: "/mcp/user"         # Préfixe de route, unique globalement, ne peut pas être répété
 ```
 
@@ -242,7 +242,7 @@ La configuration du serveur est utilisée pour définir les métadonnées du ser
 
 ```yaml
 servers:
-  - name: "mock-user-svc"             # Nom du service, doit être cohérent avec le serveur dans routers
+  - name: "mock-server"               # Nom du service, doit être cohérent avec le serveur dans routers
     namespace: "user-service"         # Espace de noms du service, utilisé pour le regroupement des services
     description: "Mock User Service"  # Description du service
     allowedTools:                     # Liste des outils autorisés (sous-ensemble d'outils)
@@ -488,7 +488,7 @@ La configuration du proxy de passerelle peut être stockée de deux manières su
 2. Stockage de fichiers :
     - Chaque configuration est stockée séparément en tant que fichier YAML
     - Similaire à la configuration vhost de Nginx
-    - Le nom de fichier est recommandé d'utiliser le nom du service, tel que `mock-user-svc.yaml`
+    - Le nom de fichier est recommandé d'utiliser le nom du service, tel que `mock-server.yaml`
 
 ## Configuration du Proxy de Service MCP
 

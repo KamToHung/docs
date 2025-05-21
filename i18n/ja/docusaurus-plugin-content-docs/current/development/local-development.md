@@ -17,7 +17,7 @@ MCP Gatewayプロジェクトは、以下の主要コンポーネントで構成
 
 1. **apiserver** - 設定管理、ユーザーインターフェース、その他のAPIサービスを提供
 2. **mcp-gateway** - コアゲートウェイサービス、MCPプロトコル変換を処理
-3. **mock-user-svc** - 開発テスト用のユーザーサービスをシミュレート
+3. **mock-server** - 開発テスト用のユーザーサービスをシミュレート
 4. **web** - 管理インターフェースフロントエンド
 
 ## 開発環境の起動
@@ -77,13 +77,13 @@ go run cmd/apiserver/main.go
 
 apiserverはデフォルトで `http://localhost:5234` で起動します。
 
-#### 4.3 mock-user-svcの起動
+#### 4.3 mock-serverの起動
 
 ```bash
-go run cmd/mock-user-svc/main.go
+go run cmd/mock-server/main.go
 ```
 
-mock-user-svcはデフォルトで `http://localhost:5235` で起動します。
+mock-serverはデフォルトで `http://localhost:5235` で起動します。
 
 #### 4.4 Webフロントエンドの起動
 

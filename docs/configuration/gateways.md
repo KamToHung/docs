@@ -5,11 +5,11 @@
 以下是一个完整的配置示例，包含了路由、CORS、响应处理等配置：
 
 ```yaml
-name: "mock-user-svc"                 # 代理服务名称，全局唯一
+name: "mock-server"              # 代理服务名称，全局唯一
 
 # 路由配置
 routers:
-  - server: "mock-user-svc"     # 服务名称
+  - server: "mock-server"       # 服务名称
     prefix: "/mcp/user"         # 路由前缀，全局唯一，不可重复，建议按照服务或者领域+模块来区分前缀
 
     # CORS 配置
@@ -30,7 +30,7 @@ routers:
 
 # 服务配置
 servers:
-  - name: "mock-user-svc"             # 服务名称，需要与routers中的server保持一致
+  - name: "mock-server"               # 服务名称，需要与routers中的server保持一致
     namespace: "user-service"         # 服务命名空间，用于服务分组
     description: "Mock User Service"  # 服务描述
     allowedTools:                     # 允许使用的工具列表（为tools的子集）
@@ -203,7 +203,7 @@ tools:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # 服务名称，需要与servers中的name保持一致
+  - server: "mock-server"       # 服务名称，需要与servers中的name保持一致
     prefix: "/mcp/user"         # 路由前缀，全局唯一，不可重复
 ```
 
@@ -242,7 +242,7 @@ cors:
 
 ```yaml
 servers:
-  - name: "mock-user-svc"             # 服务名称，需要与routers中的server保持一致
+  - name: "mock-server"               # 服务名称，需要与routers中的server保持一致
     namespace: "user-service"         # 服务命名空间，用于服务分组
     description: "Mock User Service"  # 服务描述
     allowedTools:                     # 允许使用的工具列表（为tools的子集）
@@ -488,7 +488,7 @@ args:
 2. 文件存储：
     - 每个配置单独存储为一个 YAML 文件
     - 类似 Nginx 的 vhost 配置方式
-    - 文件名建议使用服务名称，如 `mock-user-svc.yaml`
+    - 文件名建议使用服务名称，如 `mock-server.yaml`
 
 ## MCP 服务代理配置
 

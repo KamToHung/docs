@@ -5,11 +5,11 @@
 Below is a complete configuration example, including routing, CORS, response handling, and other settings:
 
 ```yaml
-name: "mock-user-svc"                 # Proxy service name, globally unique
+name: "mock-server"             # Proxy service name, globally unique
 
 # Router Configuration
 routers:
-  - server: "mock-user-svc"     # Service name
+  - server: "mock-server"       # Service name
     prefix: "/mcp/user"         # Route prefix, globally unique, cannot be repeated, recommended to distinguish by service or domain+module
 
     # CORS Configuration
@@ -30,7 +30,7 @@ routers:
 
 # Server Configuration
 servers:
-  - name: "mock-user-svc"             # Service name, must be consistent with the server in routers
+  - name: "mock-server"               # Service name, must be consistent with the server in routers
     namespace: "user-service"         # Service namespace, used for service grouping
     description: "Mock User Service"  # Service description
     allowedTools:                     # List of allowed tools (subset of tools)
@@ -203,7 +203,7 @@ Router configuration is used to define request forwarding rules:
 
 ```yaml
 routers:
-  - server: "mock-user-svc"     # Service name, must be consistent with the name in servers
+  - server: "mock-server"       # Service name, must be consistent with the name in servers
     prefix: "/mcp/user"         # Route prefix, globally unique, cannot be repeated
 ```
 
@@ -242,7 +242,7 @@ Server configuration is used to define service metadata, associated tool list, a
 
 ```yaml
 servers:
-  - name: "mock-user-svc"             # Service name, must be consistent with the server in routers
+  - name: "mock-server"               # Service name, must be consistent with the server in routers
     namespace: "user-service"         # Service namespace, used for service grouping
     description: "Mock User Service"  # Service description
     allowedTools:                     # List of allowed tools (subset of tools)
@@ -488,7 +488,7 @@ Gateway proxy configuration can be stored in the following two ways:
 2. File storage:
     - Each configuration is stored separately as a YAML file
     - Similar to Nginx's vhost configuration
-    - The file name is recommended to use the service name, such as `mock-user-svc.yaml`
+    - The file name is recommended to use the service name, such as `mock-server.yaml`
 
 ## MCP Service Proxy Configuration
 

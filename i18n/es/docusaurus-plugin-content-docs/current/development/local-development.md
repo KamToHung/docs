@@ -17,7 +17,7 @@ El proyecto MCP Gateway consiste en los siguientes componentes principales:
 
 1. **apiserver** - Proporciona gestión de configuración, interfaz de usuario y otros servicios API
 2. **mcp-gateway** - Servicio de puerta de enlace principal, maneja la conversión del protocolo MCP
-3. **mock-user-svc** - Simula el servicio de usuario para pruebas de desarrollo
+3. **mock-server** - Simula el servicio de usuario para pruebas de desarrollo
 4. **web** - Frontend de la interfaz de administración
 
 ## Iniciando el Entorno de Desarrollo
@@ -77,13 +77,13 @@ go run cmd/apiserver/main.go
 
 apiserver se iniciará en `http://localhost:5234` por defecto.
 
-#### 4.3 Iniciar mock-user-svc
+#### 4.3 Iniciar mock-server
 
 ```bash
-go run cmd/mock-user-svc/main.go
+go run cmd/mock-server/main.go
 ```
 
-mock-user-svc se iniciará en `http://localhost:5235` por defecto.
+mock-server se iniciará en `http://localhost:5235` por defecto.
 
 #### 4.4 Iniciar el frontend web
 
