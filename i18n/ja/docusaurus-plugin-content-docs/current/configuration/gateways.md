@@ -46,4 +46,21 @@ routers:
 routers:
   - server: "mock-user-svc"     # サービス名、serversの名前と一致する必要がある
     prefix: "/mcp/user"         # ルートプレフィックス、グローバルに一意、重複不可
-``` 
+```
+
+- `body`: パラメータはJSONリクエストボディに配置されます
+- `form-data`: パラメータはmultipart/form-dataリクエストボディに配置され、ファイルアップロードなどのシナリオで使用されます
+
+各パラメータにはデフォルト値を設定できます。MCPリクエストでパラメータが提供されない場合、デフォルト値が自動的に使用されます。デフォルト値が空文字列（""）の場合でも使用されます。例えば：
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # リクエストでthemeパラメータが提供されない場合、"light"がデフォルト値として使用されます
+```
+
+`form-data`をパラメータ位置として使用する場合、`requestBody`を指定する必要はありません。システムは自動的にパラメータをmultipart/form-data形式に組み立てます。例えば： 

@@ -46,4 +46,21 @@ La configuración del router se utiliza para definir reglas de reenvío de solic
 routers:
   - server: "mock-user-svc"     # Nombre del servicio, debe ser coherente con el nombre en servers
     prefix: "/mcp/user"         # Prefijo de ruta, único globalmente, no puede repetirse
-``` 
+```
+
+- `body`: Los parámetros se colocarán en el cuerpo de la solicitud JSON
+- `form-data`: Los parámetros se colocarán en el cuerpo de la solicitud multipart/form-data, utilizado para cargas de archivos y otros escenarios
+
+Cada parámetro puede tener un valor predeterminado. Cuando no se proporciona un parámetro en la solicitud MCP, se utilizará automáticamente el valor predeterminado. Incluso si el valor predeterminado es una cadena vacía (""), se utilizará. Por ejemplo:
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # Cuando no se proporciona el parámetro theme en la solicitud, se usará "light" como valor predeterminado
+```
+
+Cuando se usa `form-data` como posición del parámetro, no es necesario especificar `requestBody`, el sistema ensamblará automáticamente los parámetros en formato multipart/form-data. Por ejemplo: 

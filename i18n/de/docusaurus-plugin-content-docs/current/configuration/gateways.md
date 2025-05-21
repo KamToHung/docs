@@ -46,4 +46,21 @@ Die Router-Konfiguration wird verwendet, um Anfrageweiterleitungsregeln zu defin
 routers:
   - server: "mock-user-svc"     # Dienstname, muss mit dem Namen in servers übereinstimmen
     prefix: "/mcp/user"         # Routenpräfix, global eindeutig, kann nicht wiederholt werden
-``` 
+```
+
+- `body`: Parameter werden im JSON-Anfragekörper platziert
+- `form-data`: Parameter werden im multipart/form-data-Anfragekörper platziert, verwendet für Datei-Uploads und andere Szenarien
+
+Jeder Parameter kann einen Standardwert haben. Wenn ein Parameter in der MCP-Anfrage nicht angegeben wird, wird der Standardwert automatisch verwendet. Auch wenn der Standardwert eine leere Zeichenfolge ("") ist, wird er verwendet. Zum Beispiel:
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # Wenn der theme-Parameter in der Anfrage nicht angegeben wird, wird "light" als Standardwert verwendet
+```
+
+Wenn `form-data` als Parameterposition verwendet wird, muss `requestBody` nicht angegeben werden, das System assembliert die Parameter automatisch im multipart/form-data-Format. Zum Beispiel: 

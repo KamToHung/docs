@@ -46,4 +46,21 @@ routers:
 routers:
   - server: "mock-user-svc"     # 서비스 이름, servers의 이름과 일치해야 함
     prefix: "/mcp/user"         # 라우트 접두사, 전역적으로 고유함, 중복 불가
-``` 
+```
+
+- `body`: 매개변수는 JSON 요청 본문에 배치됩니다
+- `form-data`: 매개변수는 multipart/form-data 요청 본문에 배치되며, 파일 업로드 및 기타 시나리오에 사용됩니다
+
+각 매개변수는 기본값을 가질 수 있습니다. MCP 요청에서 매개변수가 제공되지 않으면 기본값이 자동으로 사용됩니다. 기본값이 빈 문자열("")인 경우에도 사용됩니다. 예를 들어:
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # 요청에서 theme 매개변수가 제공되지 않으면 "light"가 기본값으로 사용됩니다
+```
+
+`form-data`를 매개변수 위치로 사용할 때는 `requestBody`를 지정할 필요가 없으며, 시스템은 자동으로 매개변수를 multipart/form-data 형식으로 조립합니다. 예를 들어: 

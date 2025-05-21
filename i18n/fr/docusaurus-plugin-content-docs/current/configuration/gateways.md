@@ -419,7 +419,19 @@ Les positions de paramètres (position) prennent en charge les types suivants :
 - `body` : Le paramètre sera placé dans le corps de la requête au format JSON
 - `form-data` : Le paramètre sera placé dans le corps de la requête au format multipart/form-data, utilisé pour les téléchargements de fichiers et autres scénarios
 
-Lorsque vous utilisez `form-data` comme position de paramètre, vous n'avez pas besoin de spécifier `requestBody`, le système assemblera automatiquement les paramètres au format multipart/form-data. Par exemple :
+Chaque paramètre peut avoir une valeur par défaut. Lorsqu'un paramètre n'est pas fourni dans la requête MCP, la valeur par défaut sera automatiquement utilisée. Même si la valeur par défaut est une chaîne vide (""), elle sera utilisée. Par exemple:
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # Lorsque le paramètre theme n'est pas fourni dans la requête, "light" sera utilisé comme valeur par défaut
+```
+
+Lorsque vous utilisez `form-data` comme position de paramètre, vous n'avez pas besoin de spécifier `requestBody`, le système assemblera automatiquement les paramètres au format multipart/form-data. Par exemple:
 
 ```yaml
   - name: "update_user_avatar"

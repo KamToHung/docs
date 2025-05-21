@@ -419,6 +419,18 @@ Parameter positions (position) support the following types:
 - `body`: The parameter will be placed in the JSON format request body
 - `form-data`: The parameter will be placed in multipart/form-data format request body, used for file uploads and other scenarios
 
+Each parameter can have a default value. When a parameter is not provided in the MCP request, the default value will be automatically used. Even if the default value is an empty string (""), it will still be used. For example:
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # When theme parameter is not provided in the request, "light" will be used as the default value
+```
+
 When using `form-data` as the parameter position, you don't need to specify `requestBody`, the system will automatically assemble the parameters into multipart/form-data format. For example:
 
 ```yaml

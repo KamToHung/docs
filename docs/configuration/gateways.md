@@ -419,6 +419,18 @@ tools:
 - `body`: 参数将被放置在JSON格式的请求体中
 - `form-data`: 参数将被放置在multipart/form-data格式的请求体中，用于文件上传等场景
 
+每个参数都可以设置默认值（default），当MCP请求中没有提供该参数时，将自动使用默认值。即使默认值为空字符串（""），也会被使用。例如：
+
+```yaml
+args:
+  - name: "theme"
+    position: "body"
+    required: true
+    type: "string"
+    description: "User interface theme"
+    default: "light"    # 当请求中没有提供theme参数时，将使用"light"作为默认值
+```
+
 当使用 `form-data` 作为参数位置时，不需要指定 `requestBody`，系统会自动将参数组装成 multipart/form-data 格式。例如：
 
 ```yaml
